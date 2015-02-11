@@ -1,0 +1,75 @@
+
+class Team:
+    pointsScored = 0
+    opponentPointsScored = 0
+    fieldGoalsMade = 0
+    fieldGoalsAttempted = 0
+    fieldGoalPercentage = 0
+    threePointsMade = 0
+    threePointsAttempted = 0
+    threePointsPercentage = 0
+    freeThrowsMade = 0
+    freeThrowsAttempted = 0
+    freeThrowsPercentage = 0
+    offensiveRebounds = 0
+    defensiveRebounds = 0
+    totalRebounds = 0
+    assists = 0
+    blocks = 0
+    turnovers = 0
+    foulscomitted = 0
+    
+    opponentfieldGoalsMade = 0
+    opponentfieldGoalsAttempted = 0
+    opponentfieldGoalPercentage = 0
+    opponentthreePointsMade = 0
+    opponentthreePointsAttempted = 0
+    opponentthreePointsPercentage = 0
+    opponentfreeThrowsMade = 0
+    opponentfreeThrowsAttempted = 0
+    opponentfreeThrowsPercentage = 0
+    opponentoffensiveRebounds = 0
+    opponentdefensiveRebounds = 0
+    opponenttotalRebounds = 0
+    opponentassists = 0
+    opponentblocks = 0
+    opponentturnovers = 0
+    opponentfoulscomitted = 0
+    
+    def updateTeamStats(newStats = []):
+            pointsScored = newStats[0]
+            opponentPointsScored = newStats[1]
+            fieldGoalsMade = newStats[2]
+            fieldGoalsAttempted = newStats[3]
+            fieldGoalPercentage = newStats[4]
+            threePointsMade = newStats[5]
+            threePointsAttempted = newStats[6]
+            threePointsPercentage = newStats[7]
+            freeThrowsMade = newStats[8]
+            freeThrowsAttempted = newStats[9]
+            freeThrowsPercentage = newStats[10]
+            offensiveRebounds = newStats[11]
+            defensiveRebounds = newStats[12]
+            totalRebounds = newStats[13]
+            assists = newStats[14]
+            blocks = newStats[15]
+            turnovers = newStats[16]
+            foulscomitted = newStats[17]
+            
+            opponentfieldGoalsMade = newStats[18]
+            opponentfieldGoalsAttempted = newStats[19]
+            opponentfieldGoalPercentage = newStats[20]
+            opponentthreePointsMade = newStats[21]
+            opponentthreePointsAttempted = newStats[22]
+            opponentthreePointsPercentage = newStats[23]
+            opponentfreeThrowsMade = newStats[24]
+            opponentfreeThrowsAttempted = newStats[25]
+            opponentfreeThrowsPercentage = newStats[26]
+            opponentoffensiveRebounds = newStats[27]
+            opponentdefensiveRebounds = newStats[28]
+            opponenttotalRebounds = newStats[29]
+            opponentassists = newStats[30]
+            opponentblocks = newStats[31]
+            opponentturnovers = newStats[32]
+            opponentfoulscomitted = newStats[33]
+    

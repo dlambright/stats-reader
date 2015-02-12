@@ -79,7 +79,7 @@ def readInYValues(teamName):
     print yMatrix.shape
     
    # return yMatrix
-
+'''
 def readInXValues(teamName):
     #valuesArray = []
     readFile = open('previousData/' + teamName + '.csv', 'r').read()
@@ -94,7 +94,7 @@ def readInXValues(teamName):
            tempLineArray.append([float(line[x]])
        bigArray.append(tempLineArray)
        print bigArray
-    
+'''    
     
     
 #readInYValues('ATL')

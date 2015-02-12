@@ -80,20 +80,20 @@ def readInYValues(teamName):
     
    # return yMatrix
 
-#def readInXValues(teamName):
+def readInXValues(teamName):
     #valuesArray = []
-#    readFile = open('previousData/' + teamName + '.csv', 'r').read()
-#    readFile = readFile.split('\n')    
+    readFile = open('previousData/' + teamName + '.csv', 'r').read()
+    readFile = readFile.split('\n')    
     
-#    for line in readFile:
-#        bigArray = []
-#        tempLineArray = []        
-#        line = line.split(',')
-#        del line[0] # take the w/l out
-#       for x in range(0,len(line)-1):
-#           tempLineArray.append([float(line[x]])
-        #bigArray.append(tempLineArray)
-        #print bigArray
+    for line in readFile:
+        bigArray = []
+        tempLineArray = []        
+        line = line.split(',')
+        del line[0] # take the w/l out
+       for x in range(0,len(line)-1):
+           tempLineArray.append([float(line[x]])
+       bigArray.append(tempLineArray)
+       print bigArray
     
     
     

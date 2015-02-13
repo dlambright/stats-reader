@@ -65,44 +65,53 @@ def readInYValues(teamName):
     readFile = open('previousData/' + teamName+ '.csv', 'r').read()
     readFile = readFile.split('\n')
     
-    for line in readFile:
-        
-        if 'W' in line[0]:
+    for line in readFile:        
+        if 'W' in line:
             valuesArray.append(1)
-        elif 'L' in line[0]:
+        elif 'L' in line:
             valuesArray.append(0)
         else:
             print 'ERROR.  COULD NOT DETERMINE WIN OR LOSS.  LOOK AT LINE 51 IN PREDICT.PY'
             
-    yMatrix = np.fromiter(valuesArray, np.int)
+    yMatrix = np.empty(len(readFile)-1, dtype = int)
+    for x in range(0, len(valuesArray)):
+        yMatrix[x] = valuesArray[x]
     print valuesArray
     print yMatrix.shape
     
    # return yMatrix
 
 def readInXValues(teamName):
-    #valuesArray = []
+
     readFile = open('previousData/' + teamName + '.csv', 'r').read()
-    readFile = readFile.split('\n')    
+    readFile = readFile.split('\n') 
+    bigArray = []
     
     for line in readFile:
-        bigArray = []
+        
         tempLineArray = []        
         line = line.split(',')
         del line[0] # take the w/l out
-       for x in range(0,len(line)-1):
-           tempLineArray.append([float(line[x]])
-       bigArray.append(tempLineArray)
-       print bigArray
+        for x in range(0,len(line)-1):
+            tempLineArray.append(float(line[x]))
+        
+        if len(tempLineArray) > 0:
+            bigArray.append(tempLineArray)
+                   
+   # print bigArray[0][1]
+                   
+    rows = len(readFile) - 1
+    columns = len(bigArray[0])             
+    toReturn = np.empty([rows, columns], dtype = float)
+    
+    for j in range(0, rows):
+        for y in range(0, columns):
+            toReturn[j][y] = bigArray[j][y]
+            
+    print toReturn.shape
+    #return toReturn
     
     
     
 #readInYValues('ATL')
 #readInXValues('ATL')
-
-
-
-
-
-
-

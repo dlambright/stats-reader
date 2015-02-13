@@ -71,6 +71,7 @@ def readOldStats():
                 if x % 37 == 0 and x != 0:
                     dataFile.write('\n')
                 dataFile.write(readInData[x] + ',')
+            dataFile.write('\n')    
             dataFile.closed
         
         print str(team) + ' done.'    

@@ -80,7 +80,6 @@ def readInYValues(teamName):
     print yMatrix.shape
     
    # return yMatrix
-
 def readInXValues(teamName):
 
     readFile = open('previousData/' + teamName + '.csv', 'r').read()
@@ -111,7 +110,8 @@ def readInXValues(teamName):
     print toReturn.shape
     #return toReturn
     
+
     
     
 #readInYValues('ATL')
-#readInXValues('ATL')
+readInXValues('ATL')

@@ -1,5 +1,5 @@
 import numpy as np
-#import LogReg
+import LogReg
 
 '''
 actualData = [[0 for x in range(21)] for x in range(82)]
@@ -40,9 +40,20 @@ print dataMatrix
 dataFile.closed
 '''
 
-def predictWinProbability(stats):
+def predictWinProbability(): #stats):
     #placeholder code.  Replace when the algo is finished.
+    X = readInXValues('ATL')
+    y = readInYValues('ATL')   
+    lambdaa = 1 #what is lambda in python/numpy?
+    theta = np.zeros([X.shape[1],1], dtype = float)   
     
+    #theta = np.zeros
+    gradient = LogReg.getCostFunctionGradient(theta, X, y)
+    #print gradient
+    
+    
+    
+    ''' 
     statsLine0 = stats[0]
     statsLine1 = stats[1]
 
@@ -59,6 +70,7 @@ def predictWinProbability(stats):
     
     
     return stats       
+    '''
 
 def readInYValues(teamName):
     valuesArray = [] 
@@ -73,13 +85,13 @@ def readInYValues(teamName):
         else:
             print 'ERROR.  COULD NOT DETERMINE WIN OR LOSS.  LOOK AT LINE 51 IN PREDICT.PY'
             
-    yMatrix = np.empty(len(readFile)-1, dtype = int)
+    yMatrix = np.empty([len(readFile)-1, 1], dtype = int)
     for x in range(0, len(valuesArray)):
         yMatrix[x] = valuesArray[x]
-    print valuesArray
-    print yMatrix.shape
-    
-   # return yMatrix
+    #print valuesArray
+    #print yMatrix.shape
+    yMatrix = np.asmatrix(yMatrix)
+    return yMatrix
 def readInXValues(teamName):
 
     readFile = open('previousData/' + teamName + '.csv', 'r').read()
@@ -88,7 +100,7 @@ def readInXValues(teamName):
     
     for line in readFile:
         
-        tempLineArray = []        
+        tempLineArray = [1]        
         line = line.split(',')
         del line[0] # take the w/l out
         for x in range(0,len(line)-1):
@@ -107,11 +119,11 @@ def readInXValues(teamName):
         for y in range(0, columns):
             toReturn[j][y] = bigArray[j][y]
             
-    print toReturn.shape
-    #return toReturn
-    
-
+    #print toReturn        
+    toReturn = np.asmatrix(toReturn)  #LogReg.sigmoid(toReturn)            
+    return toReturn
     
     
 #readInYValues('ATL')
-readInXValues('ATL')
+#readInXValues('ATL')
+predictWinProbability()

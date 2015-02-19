@@ -1,5 +1,4 @@
-
-import numpy
+import numpy as np
 from scipy.special import expit
 
 
@@ -8,8 +7,32 @@ def sigmoid(matrix):
     return matrix
     
     
-#testMatrix = numpy.matrix([-2,-1,0,1,2])
-#print sigmoid(testMatrix)
+    
+def getCostFunctionGradient(theta, X, y):
+    #theta = [37, 1]
+    #X     = [135, 37]
+    #y     = [135, 1]
+
+    #print 'theta ' + str(theta.shape)
+    #print 'X     ' + str(X.shape)
+    #print 'y     ' + str(y.shape)
+    
+      
+    m = y.shape[0]
+    #print m
+    
+    h = sigmoid(X * theta)    
+    #print 'h     ' + str(h.shape)
+    
+    
+    grad = (X.transpose()* (h-y)) / m 
+    #print 'grad  ' + str(grad.shape)
+    #print grad    
+    return grad
+
+def getCostFunctionJ(theta, X, y):
+    print 'nuffin'
+
 
 
 def costFunctionReg(theta, X, y, lambdaa):

@@ -3,7 +3,7 @@ import datetime
 import time
 #import httplib2
 
-import predict
+#import predict
 import liveStatsSupportFunctions
 import oldStatsReader
 
@@ -116,14 +116,14 @@ print 'ARE YOU READY TO RUMBLE?'
 # WAIT FOR THE (ALMOST) RIGHT TIME TO START THE LOOP.
 # SHOULD CUT DOWN ON PROCESSOR WORKLOAD
 theTime = datetime.datetime.now()
-while theTime.hour < 15:
+while theTime.hour < 16:
     print 'sleeping for an hour'
     time.sleep(3600)
     theTime = datetime.datetime.now()
 
-    
-oldStatsReader.readOldStats()
-#print 'read the old stats!'
+print 'yo mama'    
+#oldStatsReader.readOldStats()
+print 'read the old stats!'
 
 # PRIME THE LOOP
 scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()

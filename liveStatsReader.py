@@ -119,9 +119,8 @@ while theTime.hour < 16:
     time.sleep(3600)
     theTime = datetime.datetime.now()
 
-print 'yo mama'    
-#oldStatsReader.readOldStats()
-print 'read the old stats!'
+oldStatsReader.readOldStats()
+#print 'read the old stats!'
 
 # PRIME THE LOOP
 scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()

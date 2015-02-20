@@ -89,11 +89,9 @@ def readLiveStats(html):
             rightSpot = False 
         if 'TOTALS' in line:
             rightSpot = True
-   
     teams = getNamesFromHTML(html)
     stats = addScoresToCorrectPlaces(stats)
-   
-    stats = predict.predictWinProbability(stats)
+    #stats = predict.predictWinProbability(stats)
     
     
     printStatsToFile(teams[0], stats[0])

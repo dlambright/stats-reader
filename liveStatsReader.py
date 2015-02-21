@@ -109,7 +109,7 @@ def readLiveStats(html):
 ||__|||__|||__|||__|||__|||_______|||__|||__|||__|||__|||__|||__||
 |/__\|/__\|/__\|/__\|/__\|/_______\|/__\|/__\|/__\|/__\|/__\|/__\|   
 '''
-
+'''
 print 'ARE YOU READY TO RUMBLE?'
 # WAIT FOR THE (ALMOST) RIGHT TIME TO START THE LOOP.
 # SHOULD CUT DOWN ON PROCESSOR WORKLOAD
@@ -118,22 +118,23 @@ while theTime.hour < 15:
     print 'sleeping for an hour'
     time.sleep(3600)
     theTime = datetime.datetime.now()
-
+'''
 oldStatsReader.readOldStats()
 #print 'read the old stats!'
 
 # PRIME THE LOOP
-scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
-splitScoreboardHTML = scoreboardHTML.split('\n')
+while(True):
+    scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
+    splitScoreboardHTML = scoreboardHTML.split('\n')
 
-todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
-previewGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
-print str(len(todaysGames) + len(previewGames)) + ' games to play today'
+    todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
+    previewGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
+    print str(len(todaysGames) + len(previewGames)) + ' games to play today'
 
 
 # READ THE DATA WHILE THERE IS STILL A GAME THAT ISN'T FINISHED
-badReads = 0
-while len(previewGames) > 0 or len(todaysGames) > 0: 
+    badReads = 0
+#while len(previewGames) > 0 or len(todaysGames) > 0: 
 
 
     for url in todaysGames:

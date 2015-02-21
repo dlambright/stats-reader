@@ -114,7 +114,7 @@ print 'ARE YOU READY TO RUMBLE?'
 # WAIT FOR THE (ALMOST) RIGHT TIME TO START THE LOOP.
 # SHOULD CUT DOWN ON PROCESSOR WORKLOAD
 theTime = datetime.datetime.now()
-while theTime.hour < 16:
+while theTime.hour < 15:
     print 'sleeping for an hour'
     time.sleep(3600)
     theTime = datetime.datetime.now()

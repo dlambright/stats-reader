@@ -6,7 +6,7 @@ print "Running Scraper..."
 teams = ['ATL','BOS','BRK','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHO','POR','SAC','SAS','TOR','UTA','WAS']
 years = ['2014', '2015']
 gameLog = 'gamelog/'
-BASE_URL = "http://www.basketball-reference.com/teams/"
+BASE_URL = "http://www.basketball-reference.com/teams"
 
 def addDefensiveRebounds(text):
     x = 0
@@ -52,6 +52,7 @@ def readOldStats():
         dataFile = open('previousData/'+ team + '.csv', 'w+')
         for year in years:
             rightSpot = False
+            #print BASE_URL + '/' + team + '/' + year + '/' + gameLog
             pageHTML = urlopen(BASE_URL + '/' + team + '/' + year + '/' + gameLog).read()
             currentLines = pageHTML.split('\n')        
         
@@ -71,6 +72,7 @@ def readOldStats():
                 if x % 37 == 0 and x != 0:
                     dataFile.write('\n')
                 dataFile.write(readInData[x] + ',')
+            dataFile.write('\n')    
             dataFile.closed
         
         print str(team) + ' done.'    

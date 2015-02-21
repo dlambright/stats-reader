@@ -10,6 +10,7 @@ recapURL = '/nba/recap?gameId='
 
 
 
+
 # GETS THE REMAINING GAME TIME
 def getTimeRemaining(gameData):
      for line in gameData:
@@ -33,14 +34,8 @@ def getIdFromLine(line, subString):
     return gameId 
              
 # GET GAMES THAT ARE ALREADY OVER             
-def getFinishedGames():  
-    toReturn = []
-    try:
-        html = urlopen(baseURL).read()
-    except:
-        time.sleep(10)
-        html = urlopen(baseURL).read()
-    htmlSplit = html.split('\n')
+def getFinishedGames(htmlSplit):  
+    toReturn = []       
     
     for line in htmlSplit:
         while line.find(recapURL) != -1:
@@ -48,25 +43,14 @@ def getFinishedGames():
             temp = line[firstIndex : firstIndex+27]
             line = line[firstIndex+27 : len(line)]
             gameId = getIdFromLine(temp, recapURL)
-            game = urlBeginning + boxScoreURL + gameId
-            gameHTML = urlopen(game).read()
-            game = gameHTML.split('\n')
-            
-            if recapURL+gameId in htmlSplit or getTimeRemaining(game) == 'End of game':
-                readInLine = recapURL + gameId 
-                toReturn.append(readInLine)  
+            readInLine = gameId 
+            toReturn.append(readInLine)  
     return toReturn
    
 # GET GAMES THAT ARE BEING PLAYED   
-def getGamesInProgress():
-    toReturn = []
-    try:    
-        html = urlopen(baseURL).read()
-    except:
-        time.sleep(10)
-        html = urlopen(baseURL).read()
-    htmlSplit = html.split('\n')
-    finishedGames = getFinishedGames()
+def getGamesInProgress(htmlSplit):
+    toReturn = []    
+    finishedGames = getFinishedGames(htmlSplit)
     for line in htmlSplit:
         while line.find(boxScoreURL) != -1:
             firstIndex = line.index(boxScoreURL)
@@ -74,20 +58,15 @@ def getGamesInProgress():
             line = line[firstIndex+30 : len(line)]
             gameId = getIdFromLine(temp, boxScoreURL)
             readInLine = urlBeginning + boxScoreURL + gameId 
-            if not recapURL+gameId in finishedGames and readInLine not in toReturn:
-     
+
+            if readInLine not in toReturn and gameId not in finishedGames:
                 toReturn.append(readInLine)  
     return toReturn
        
 # GET GAMES THAT HAVEN'T STARTED YET
-def getGamesToBePlayed():
+def getGamesToBePlayed(htmlSplit):
     toReturn = []
-    try:
-        html = urlopen(baseURL).read()
-    except:
-        time.sleep(10)
-        html = urlopen(baseURL).read()
-    htmlSplit = html.split('\n')
+
     for line in htmlSplit:
         while line.find(previewURL) != -1:
             firstIndex = line.index(previewURL)

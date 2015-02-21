@@ -3,7 +3,7 @@ import datetime
 import time
 #import httplib2
 
-import predict
+#import predict
 import liveStatsSupportFunctions
 import oldStatsReader
 
@@ -89,10 +89,8 @@ def readLiveStats(html):
             rightSpot = False 
         if 'TOTALS' in line:
             rightSpot = True
-   
     teams = getNamesFromHTML(html)
     stats = addScoresToCorrectPlaces(stats)
-   
     #stats = predict.predictWinProbability(stats)
     
     
@@ -116,26 +114,27 @@ print 'ARE YOU READY TO RUMBLE?'
 # WAIT FOR THE (ALMOST) RIGHT TIME TO START THE LOOP.
 # SHOULD CUT DOWN ON PROCESSOR WORKLOAD
 theTime = datetime.datetime.now()
-while theTime.hour < 15:
+while theTime.hour < 16:
     print 'sleeping for an hour'
     time.sleep(3600)
     theTime = datetime.datetime.now()
 
-    
 oldStatsReader.readOldStats()
 #print 'read the old stats!'
 
 # PRIME THE LOOP
-todaysGames = liveStatsSupportFunctions.getGamesInProgress()
-previewGames = liveStatsSupportFunctions.getGamesToBePlayed()
+scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
+splitScoreboardHTML = scoreboardHTML.split('\n')
+
+todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
+previewGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
 print str(len(todaysGames) + len(previewGames)) + ' games to play today'
 
 
 # READ THE DATA WHILE THERE IS STILL A GAME THAT ISN'T FINISHED
 badReads = 0
 while len(previewGames) > 0 or len(todaysGames) > 0: 
-    todaysGames = liveStatsSupportFunctions.getGamesInProgress()
-    previewGames = liveStatsSupportFunctions.getGamesToBePlayed()
+
 
     for url in todaysGames:
         try:        
@@ -144,8 +143,17 @@ while len(previewGames) > 0 or len(todaysGames) > 0:
                 readLiveStats(html)
         except:
             badReads += 1
-            print '\a'
             print 'Unable to find ' + url
+            
+    try:
+        scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
+        splitScoreboardHTML = scoreboardHTML.split('\n')
+        
+        todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
+        previewGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
+    except:
+        print 'unable to access scoreboard home'
+            
             
 
     print str(datetime.datetime.now()) + '--------' + str(badReads) + ' bad reads.'

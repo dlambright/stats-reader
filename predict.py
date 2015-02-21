@@ -1,5 +1,5 @@
 import numpy as np
-#import LogReg
+import LogReg
 
 '''
 actualData = [[0 for x in range(21)] for x in range(82)]
@@ -40,9 +40,20 @@ print dataMatrix
 dataFile.closed
 '''
 
-def predictWinProbability(stats):
+def predictWinProbability(): #stats):
     #placeholder code.  Replace when the algo is finished.
+    X = readInXValues('ATL')
+    y = readInYValues('ATL')   
+    lambdaa = 1 #what is lambda in python/numpy?
+    theta = np.zeros([X.shape[1],1], dtype = float)   
     
+    #theta = np.zeros
+    gradient = LogReg.getCostFunctionGradient(theta, X, y)
+    #print gradient
+    
+    
+    
+    ''' 
     statsLine0 = stats[0]
     statsLine1 = stats[1]
 
@@ -59,50 +70,60 @@ def predictWinProbability(stats):
     
     
     return stats       
+    '''
 
 def readInYValues(teamName):
     valuesArray = [] 
     readFile = open('previousData/' + teamName+ '.csv', 'r').read()
     readFile = readFile.split('\n')
     
-    for line in readFile:
-        
-        if 'W' in line[0]:
+    for line in readFile:        
+        if 'W' in line:
             valuesArray.append(1)
-        elif 'L' in line[0]:
+        elif 'L' in line:
             valuesArray.append(0)
         else:
             print 'ERROR.  COULD NOT DETERMINE WIN OR LOSS.  LOOK AT LINE 51 IN PREDICT.PY'
             
-    yMatrix = np.fromiter(valuesArray, np.int)
-    print valuesArray
-    print yMatrix.shape
-    
-   # return yMatrix
+    yMatrix = np.empty([len(readFile)-1, 1], dtype = int)
+    for x in range(0, len(valuesArray)):
+        yMatrix[x] = valuesArray[x]
+    #print valuesArray
+    #print yMatrix.shape
+    yMatrix = np.asmatrix(yMatrix)
+    return yMatrix
+def readInXValues(teamName):
 
-#def readInXValues(teamName):
-    #valuesArray = []
-#    readFile = open('previousData/' + teamName + '.csv', 'r').read()
-#    readFile = readFile.split('\n')    
+    readFile = open('previousData/' + teamName + '.csv', 'r').read()
+    readFile = readFile.split('\n') 
+    bigArray = []
     
-#    for line in readFile:
-#        bigArray = []
-#        tempLineArray = []        
-#        line = line.split(',')
-#        del line[0] # take the w/l out
-#       for x in range(0,len(line)-1):
-#           tempLineArray.append([float(line[x]])
-        #bigArray.append(tempLineArray)
-        #print bigArray
+    for line in readFile:
+        
+        tempLineArray = [1]        
+        line = line.split(',')
+        del line[0] # take the w/l out
+        for x in range(0,len(line)-1):
+            tempLineArray.append(float(line[x]))
+        
+        if len(tempLineArray) > 0:
+            bigArray.append(tempLineArray)
+                   
+   # print bigArray[0][1]
+                   
+    rows = len(readFile) - 1
+    columns = len(bigArray[0])             
+    toReturn = np.empty([rows, columns], dtype = float)
     
+    for j in range(0, rows):
+        for y in range(0, columns):
+            toReturn[j][y] = bigArray[j][y]
+            
+    #print toReturn        
+    toReturn = np.asmatrix(toReturn)  #LogReg.sigmoid(toReturn)            
+    return toReturn
     
     
 #readInYValues('ATL')
 #readInXValues('ATL')
-
-
-
-
-
-
-
+predictWinProbability()

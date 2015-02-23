@@ -124,6 +124,8 @@ oldStatsReader.readOldStats()
 
 # PRIME THE LOOP
 while(True):
+    theTime = datetime.datetime.now()
+    
     scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
     splitScoreboardHTML = scoreboardHTML.split('\n')
 

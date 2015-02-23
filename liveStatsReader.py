@@ -119,12 +119,15 @@ while theTime.hour < 15:
     time.sleep(3600)
     theTime = datetime.datetime.now()
 '''
-oldStatsReader.readOldStats()
+
+
 #print 'read the old stats!'
 
 # PRIME THE LOOP
 while(True):
     theTime = datetime.datetime.now()
+    if theTime.hour == 1 and theTime.minute < 2:
+        oldStatsReader.readOldStats()
     
     scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
     splitScoreboardHTML = scoreboardHTML.split('\n')

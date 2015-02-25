@@ -6,6 +6,13 @@ def sigmoid(matrix):
     matrix = expit(matrix)
     return matrix
     
+def getYInverse(y):
+    for x in range(0, y.shape[0]):
+        if y[x] == 1:
+            y[x] = 0
+        else:
+            y[x] = 1
+    return y
     
     
 def getCostFunctionGradient(theta, X, y):
@@ -16,7 +23,6 @@ def getCostFunctionGradient(theta, X, y):
     #print 'theta ' + str(theta.shape)
     #print 'X     ' + str(X.shape)
     #print 'y     ' + str(y.shape)
-    
       
     m = y.shape[0]
     #print m

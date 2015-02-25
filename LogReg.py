@@ -35,9 +35,19 @@ def getCostFunctionGradient(theta, X, y):
     #print 'grad  ' + str(grad.shape)
     #print grad    
     return grad
+    
+    
+  
 
 def getCostFunctionJ(theta, X, y):
-    print 'nuffin'
+    yInverse = getYInverse(y)
+    m = y.shape[0]    
+    
+    h = sigmoid(X * theta)    
+    J = ((y.transpose() * np.log(h)) + (yInverse.transpose() * np.log(1-h))) / m        
+    
+    print J
+    return J
 
 
 

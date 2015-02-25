@@ -49,6 +49,7 @@ def predictWinProbability(): #stats):
     
     #theta = np.zeros
     gradient = LogReg.getCostFunctionGradient(theta, X, y)
+    J = LogReg.getCostFunctionJ(theta, X, y)
     #print gradient
     
     

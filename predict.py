@@ -50,7 +50,8 @@ def predictWinProbability(): #stats):
     #theta = np.zeros
     gradient = LogReg.getCostFunctionGradient(theta, X, y)
     J = LogReg.getCostFunctionJ(theta, X, y)
-    #print gradient
+    print gradient
+    print J
     
     
     
@@ -93,6 +94,7 @@ def readInYValues(teamName):
     #print yMatrix.shape
     yMatrix = np.asmatrix(yMatrix)
     return yMatrix
+    
 def readInXValues(teamName):
 
     readFile = open('previousData/' + teamName + '.csv', 'r').read()

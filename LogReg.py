@@ -2,6 +2,12 @@ import numpy as np
 from scipy.special import expit
 
 
+def mapFeature(X1, X2):
+    degree = 6
+    out = np.ones([X1.shape[1],1], dtype = float) 
+
+
+
 def sigmoid(matrix):
     matrix = expit(matrix)
     return matrix

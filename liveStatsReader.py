@@ -1,9 +1,7 @@
 from urllib2 import urlopen
 import datetime
 import time
-#import httplib2
 
-#import predict
 import liveStatsSupportFunctions
 import oldStatsReader
 

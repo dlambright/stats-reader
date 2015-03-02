@@ -2,10 +2,23 @@ import numpy as np
 from scipy.special import expit
 
 
+def mapFeature(X1, X2):
+    degree = 6
+    out = np.ones([X1.shape[1],1], dtype = float) 
+
+
+
 def sigmoid(matrix):
     matrix = expit(matrix)
     return matrix
     
+def getYInverse(y):
+    for x in range(0, y.shape[0]):
+        if y[x] == 1:
+            y[x] = 0
+        else:
+            y[x] = 1
+    return y
     
     
 def getCostFunctionGradient(theta, X, y):
@@ -16,7 +29,6 @@ def getCostFunctionGradient(theta, X, y):
     #print 'theta ' + str(theta.shape)
     #print 'X     ' + str(X.shape)
     #print 'y     ' + str(y.shape)
-    
       
     m = y.shape[0]
     #print m
@@ -29,10 +41,25 @@ def getCostFunctionGradient(theta, X, y):
     #print 'grad  ' + str(grad.shape)
     #print grad    
     return grad
+    
+    
+  
 
 def getCostFunctionJ(theta, X, y):
-    print 'nuffin'
+    yInverse = getYInverse(y)
+    m = y.shape[0]    
+    
+    h = sigmoid(X * theta)    
+    J = ((y.transpose() * np.log(h)) + (yInverse.transpose() * np.log(1-h))) / m        
+    
+    print J
+    return J
 
+
+def logisticRegression(theta, alpha, X, y):
+    #θ :=θ−αmXT(g(Xθ)−y⃗ )
+    m = y.shape{
+    theta = theta - (alpha/m)
 
 
 def costFunctionReg(theta, X, y, lambdaa):

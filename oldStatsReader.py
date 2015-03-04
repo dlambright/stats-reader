@@ -3,8 +3,8 @@ import numpy as np
 
 print "Reading training data....."
 
-teams = ['ATL','BOS','BRK','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHO','POR','SAC','SAS','TOR','UTA','WAS']
-#teams = ['ATL']
+#teams = ['ATL','BOS','BRK','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHO','POR','SAC','SAS','TOR','UTA','WAS']
+teams = ['ATL']
 years = ['2014', '2015']
 gameLog = 'gamelog/'
 BASE_URL = "http://www.basketball-reference.com/teams"
@@ -94,17 +94,21 @@ def readOldStats():
             #dataFile.closed
         
         print str(team) + ' done.'
-        np.delete(X,0)
-       
-        
+    X = X[1:]
     print "scan complete"
-    #return X
+    y = X[:,1]
+    X = X[:,2:]
+    return X, y
 
+sampleDataRead = np.array([93, 91, 34, 79, 0.430379746835, 10, 25, 0.4, 15, 20, 0.75, 8, 29, 37, 23, 12, 5, 18, 19, 32, 81, 0.395061728395, 7, 26, 0.269230769231, 20, 21, 0.952380952381, 14, 33, 47, 17, 12, 3, 23, 16])
 
+        
+        
 
 #X = readOldStats()
-#print X.shape
-
+#print y
+#print X[0]
+#print sampleDataRead.shape
 
 
 

@@ -14,11 +14,17 @@ class neuralNetwork(object):
         return toReturn
     
     def sigmoidPrime(self, z):
-        return np.exp((-z)/((1+np.exp(-z))**2))
+        return np.exp(-z)/((1+np.exp(-z))**2)
 
     def costFunction(self, X, y):
         self.yHat = self.forward(X)
-        J = .5 * sum((y-self.yHat)**2)/X.shape[0] + (self.lambda/2) * sum(self.W1**2) + sum(self.W2**2)
+        ''' 
+        print 'X:  ' + str(X.shape)
+        print 'y:  ' + str(y.shape)
+        print 'W1: ' + str(self.W1.shape)#NN.W1)
+        print 'W2: ' + str(self.W2.shape)#W2) 
+        '''
+        J = .5 * sum((y-self.yHat)**2)#/X.shape[0] + (self.Lambda/2) * (sum(self.W1**2) + sum(self.W2**2))
         return J
          
     def forward(self, X):
@@ -32,10 +38,10 @@ class neuralNetwork(object):
         self.yHat = self.forward(X)
         
         delta3 = np.multiply(-(y-self.yHat), self.sigmoidPrime(self.z3))
-        dJdW2 = np.dot(self.a2.T, delta3) + self.Lambda * self.W2
+        dJdW2 = np.dot(self.a2.T, delta3)# + self.Lambda * self.W2
 
         delta2 = np.dot(delta3, self.W2.T)* self.sigmoidPrime(self.z2)
-        dJdW1 = np.dot(X.T, delta2) + self.Lambda * self.W1
+        dJdW1 = np.dot(X.T, delta2)# + self.Lambda * self.W1
 
         return dJdW1, dJdW2
     
@@ -100,8 +106,7 @@ def computeNumericalGradient(N, X, y):
 
     return numGrad
 
-
-
+'''
 NN = neuralNetwork()
 T = tr.trainer(NN)
 
@@ -109,8 +114,7 @@ X = np.array(([3,5],[5,1],[10,2]), dtype = float)
 y = np.array(([75],[82], [93]), dtype = float)
 
 print NN.forward(X)
-
-
+'''
 
 
 #T.train(X, y)
@@ -123,14 +127,6 @@ print NN.forward(X)
 
 #check the difference.  should be < 10*e-7 or so
 #print np.linalg.norm(grad-numGrad)/np.linalg.norm(grad+numGrad)
-
-
-
-
-
-
-
-
 
 
 #yHat = NN.forward(X)

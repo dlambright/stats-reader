@@ -9,6 +9,7 @@ class neuralNetwork(object):
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
         self.Lambda = .0001
+    
     def sigmoid(self, z):
         toReturn = 1/(1+np.exp(-z))
         return toReturn
@@ -24,7 +25,7 @@ class neuralNetwork(object):
         print 'W1: ' + str(self.W1.shape)#NN.W1)
         print 'W2: ' + str(self.W2.shape)#W2) 
         '''
-        J = .5 * sum((y-self.yHat)**2)#/X.shape[0] + (self.Lambda/2) * (sum(self.W1**2) + sum(self.W2**2))
+        J = 0.5*sum((y-self.yHat)**2)/X.shape[0] + (self.Lambda/2)*(np.sum(self.W1**2)+np.sum(self.W2**2))
         return J
          
     def forward(self, X):
@@ -38,10 +39,10 @@ class neuralNetwork(object):
         self.yHat = self.forward(X)
         
         delta3 = np.multiply(-(y-self.yHat), self.sigmoidPrime(self.z3))
-        dJdW2 = np.dot(self.a2.T, delta3)# + self.Lambda * self.W2
+        dJdW2 = np.dot(self.a2.T, delta3) + self.Lambda * self.W2
 
         delta2 = np.dot(delta3, self.W2.T)* self.sigmoidPrime(self.z2)
-        dJdW1 = np.dot(X.T, delta2)# + self.Lambda * self.W1
+        dJdW1 = np.dot(X.T, delta2) + self.Lambda * self.W1
 
         return dJdW1, dJdW2
     

@@ -8,8 +8,11 @@ import trainer as tr
 NN = nn.neuralNetwork()
 T = tr.trainer(NN)
 
-X = np.array(([3,5],[5,1],[10,2]), dtype = float)
-y = np.array(([75],[82], [93]), dtype = float)
+X = np.array(([3.0,5.0],[5.0,1.0],[10.0,2.0]), dtype = float)
+y = np.array(([75.0],[82.0], [93.0]), dtype = float)
+
+X = X/np.amax(X, axis=0)
+y = y/100
 
 print NN.forward(X)
 print '\n'

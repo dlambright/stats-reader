@@ -3,13 +3,13 @@ import trainer as tr
 
 class neuralNetwork(object):
     def __init__(self):
-        self.inputLayerSize = 2
+        self.inputLayerSize =  2 
         self.outputLayerSize = 1
         self.hiddenLayerSize = 3
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
         self.Lambda = .0001
-    
+        
     def sigmoid(self, z):
         toReturn = 1/(1+np.exp(-z))
         return toReturn
@@ -38,11 +38,16 @@ class neuralNetwork(object):
     def costFunctionPrime(self, X, y):
         self.yHat = self.forward(X)
         
+        print 'a2:     ' + str(self.a2.T.shape)
+        print 'w2:     ' + str(self.W2.shape)
+        
         delta3 = np.multiply(-(y-self.yHat), self.sigmoidPrime(self.z3))
-        dJdW2 = np.dot(self.a2.T, delta3) + self.Lambda * self.W2
-
+        print 'delta3: ' + str(delta3.shape)
+        dJdW2 = np.dot(self.a2.T, delta3)/X.shape[0] + self.Lambda * self.W2
+        
+        
         delta2 = np.dot(delta3, self.W2.T)* self.sigmoidPrime(self.z2)
-        dJdW1 = np.dot(X.T, delta2) + self.Lambda * self.W1
+        dJdW1 = np.dot(X.T, delta2)/X.shape[0] + self.Lambda * self.W1
 
         return dJdW1, dJdW2
     

@@ -1,8 +1,8 @@
 import numpy as np
 import neural_network as nn
 import trainer as tr
-#import oldStatsReader
-
+import oldStatsReader
+	
 
 
 NN = nn.neuralNetwork()
@@ -11,10 +11,18 @@ T = tr.trainer(NN)
 X = np.array(([3.0,5.0],[5.0,1.0],[10.0,2.0]), dtype = float)
 y = np.array(([75.0],[82.0], [93.0]), dtype = float)
 
+
+#X, y = oldStatsReader.readOldStats()
+print X.shape
+print y.shape
+print NN.W1.shape
+print NN.W2.shape
+
 X = X/np.amax(X, axis=0)
 y = y/100
 
-print NN.forward(X)
+NN.forward(X)
+print 'first forward done. \n'
 print '\n'
 T.train(X,y)
 print NN.forward(X)

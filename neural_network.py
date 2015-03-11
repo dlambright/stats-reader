@@ -3,12 +3,13 @@ import trainer as tr
 
 class neuralNetwork(object):
     def __init__(self):
-        self.inputLayerSize =  2 
+        self.inputLayerSize =  36 
         self.outputLayerSize = 1
-        self.hiddenLayerSize = 3
+        self.hiddenLayerSize = 18
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
         self.Lambda = .0001
+        self.iteration = 0
         
     def sigmoid(self, z):
         toReturn = 1/(1+np.exp(-z))
@@ -30,24 +31,32 @@ class neuralNetwork(object):
          
     def forward(self, X):
         self.z2 = np.dot(X, self.W1)
+#        print 'z2:   ' + str(self.z2.shape)
         self.a2 = self.sigmoid(self.z2)
+#        print 'a2:   ' + str(self.a2.shape)
         self.z3 = np.dot(self.a2, self.W2)
+#        print 'z3:   ' + str(self.z3.shape)
         yHat = self.sigmoid(self.z3)
+#        print 'yHat: ' + str(yHat.shape)
         return yHat
     
     def costFunctionPrime(self, X, y):
+        print 'iteration ' + str(self.iteration)
+        self.iteration = self.iteration + 1
         self.yHat = self.forward(X)
         
-        print 'a2:     ' + str(self.a2.T.shape)
-        print 'w2:     ' + str(self.W2.shape)
-        
+#        print 'a2:     ' + str(self.a2.T.shape)
+#        print 'w2:     ' + str(self.W2.shape)
+       
         delta3 = np.multiply(-(y-self.yHat), self.sigmoidPrime(self.z3))
-        print 'delta3: ' + str(delta3.shape)
+#        print 'delta3: ' + str(delta3.shape)
         dJdW2 = np.dot(self.a2.T, delta3)/X.shape[0] + self.Lambda * self.W2
-        
-        
+#        print 'djdw2 : ' + str(dJdW2.shape)
+                
         delta2 = np.dot(delta3, self.W2.T)* self.sigmoidPrime(self.z2)
+#        print 'delta2: ' + str(delta2.shape)
         dJdW1 = np.dot(X.T, delta2)/X.shape[0] + self.Lambda * self.W1
+#        print 'djdw1: ' + str(dJdW1.shape)
 
         return dJdW1, dJdW2
     

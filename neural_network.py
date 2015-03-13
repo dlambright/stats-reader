@@ -5,7 +5,7 @@ class neuralNetwork(object):
     def __init__(self):
         self.inputLayerSize =  36 
         self.outputLayerSize = 1
-        self.hiddenLayerSize = 18
+        self.hiddenLayerSize = 36
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
         self.Lambda = .0001

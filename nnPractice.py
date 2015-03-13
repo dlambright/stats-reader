@@ -30,7 +30,7 @@ T.train(X,y)
 #sampleDataRead = np.array([33, 21, 12, 21, 0.571428571429, 4, 8, 0.5, 5, 5, 1.0, 1, 12, 13, 9, 5, 5, 6, 6, 7, 24, 0.291666666667, 3, 8, 0.375, 4, 8, 0.5, 6, 6, 12, 6, 3, 0, 6, 3])
 
 gameProgressionArray = np.empty([36])
-openFile = open('gameData/AtlantaHawks/2-20-2015.csv').read()
+openFile = open('gameData/AtlantaHawks/2-28-2015.csv').read()
 fileData = openFile.split('\n')
 for line in fileData:
     temp = np.fromstring(line, dtype=float, count = 36, sep=',')
@@ -41,7 +41,8 @@ print gameProgressionArray[0]
 
 
 result = NN.forward(gameProgressionArray)
-print result
+for item in result:
+    print '%.10f'%item
 print 'sum: ' + str (sum(result))
 '''
 END TEST BLOCK

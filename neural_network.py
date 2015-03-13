@@ -3,9 +3,9 @@ import trainer as tr
 
 class neuralNetwork(object):
     def __init__(self):
-        self.inputLayerSize =  36 
+        self.inputLayerSize = 19 
         self.outputLayerSize = 1
-        self.hiddenLayerSize = 36
+        self.hiddenLayerSize = 30
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
         self.Lambda = .0001

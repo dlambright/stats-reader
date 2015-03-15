@@ -14,13 +14,17 @@ class trainer(object):
     def callbackF(self, params):
         self.N.setParams(params)
         self.J.append(self.N.costFunction(self.X, self.y))
+        self.testJ.append(self.N.costFunction(self.testX, self.testY))
 
-    def train(self, X, y):
+    def train(self, trainX, trainY, testX, testY):
+        self.X = trainX
+        self.y = trainY
 
-        self.X = X
-        self.y = y
-
+        self.testX = testX
+        self.testY = testY
+        
         self.J = []
+        self.testJ = []
         params0 = self.N.getParams()
         
         
@@ -30,7 +34,7 @@ class trainer(object):
                                     params0, 
                                     jac = True, 
                                     method='BFGS', 
-                                    args = (X,y), 
+                                    args = (trainX,trainY), 
                                     options=options, 
                                     callback=self.callbackF)
         #print _res

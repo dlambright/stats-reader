@@ -3,7 +3,7 @@ import trainer as tr
 
 class neuralNetwork(object):
     def __init__(self, newHLSize, newLambda):
-        self.inputLayerSize = 19 
+        self.inputLayerSize = 36 
         self.outputLayerSize = 1
         self.hiddenLayerSize = newHLSize
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
@@ -41,7 +41,7 @@ class neuralNetwork(object):
         return yHat
     
     def costFunctionPrime(self, X, y):
-        #!print 'iteration ' + str(self.iteration)
+        print 'iteration ' + str(self.iteration)
         self.iteration = self.iteration + 1
         self.yHat = self.forward(X)
         

@@ -11,7 +11,7 @@ IF THIS FALLS TO SHIT, MAYBE TAKE THE PERCENTAGES OUT.  THEY MIGHT BE CAUSING SO
 '''
 
 
-NN = nn.neuralNetwork(12, .0001)
+NN = nn.neuralNetwork(36, .001)
 T = tr.trainer(NN)
 #X = np.array(([3.0,5.0],[5.0,1.0],[10.0,2.0]), dtype = float)
 #y = np.array(([75.0],[82.0], [93.0]), dtype = float)
@@ -19,6 +19,8 @@ T = tr.trainer(NN)
 
 X, y = oldStatsReader.readOldStats()
 size = X.shape[0]
+X = X/np.amax(X, axis=0) #<---- Check this value out....
+#y = y/100
 trainSize = int(.7 * size)
 testSize = int(.3 * size)
 
@@ -45,7 +47,6 @@ plt.xlabel('Iterations')
 plt.ylabel('Cost')
 plt.show()
 
-
 '''
 print X.shape
 print y.shape
@@ -53,24 +54,25 @@ print NN.W1.shape
 print NN.W2.shape
 '''
 
-#X = X/np.amax(X, axis=0) #<---- Check this value out....
-#y = y/100
-#NN.forward(X)
+NN.forward(X)
 #print 'first forward done. \n'
 #print '\n'
 #T.train(trainX, trainY, testX, testY)
 
-'''
 
-gameProgressionArray = np.empty([19])
-openFile = open('gameData/AtlantaHawks/2-25-2015.csv').read()
+
+gameProgressionArray = np.empty([36])
+openFile = open('gameData/AtlantaHawks/2-28-2015.csv').read()
 fileData = openFile.split('\n')
 for line in fileData:
-    temp = np.fromstring(line, dtype=float, count = 19, sep=',')
+    temp = np.fromstring(line, dtype=float, count = 36, sep=',')
     gameProgressionArray = np.vstack((gameProgressionArray, temp))
 gameProgressionArray = gameProgressionArray[1:] 
-#print gameProgressionArray.shape
-#print gameProgressionArray[0]
+
+#gameProgressionArray = gameProgressionArray[:, [0,2,3,5,6,8,9,11,12,13,14,15,16,17,18]]
+print gameProgressionArray.shape
+print gameProgressionArray[3]
+
 
 
 result = NN.forward(gameProgressionArray)
@@ -89,12 +91,11 @@ plt.xlabel('iteration')
 plt.ylabel('Win Probability')
 plt.title('Atlanta Hawks 2-25-2015')
 plt.grid(True)
-plt.savefig("result" + str(j)+ "index" +str(i)+"node.png")
-plt.clf()
-#show()
+#plt.savefig("result" + str(j)+ "index" +str(i)+"node.png")
+plt.show()
 
 
-'''
+
 #END TEST BLOCK
 '''
 

@@ -48,7 +48,7 @@ def pruneFromTags(line):
   
     return toReturn
 
-
+# THIS METHOD PUTS THE SCORES AT THE BEGINNING FOR BOTH TEAMS, IN THE CORRECT ORDER
 def addScoresToCorrectPlaces(stats):
     score1 = [stats[0][17]]
     del stats[0][-1]
@@ -65,7 +65,8 @@ def addScoresToCorrectPlaces(stats):
     
     return stats
 
-
+# THIS METHOD DOES THE WRITING TO FILE.  EVENTUALLY, THIS METHOD WILL BE REPLACED BY 
+# THE NEURAL NETWORK CALCULATIONS...
 def printStatsToFile(teamFileName, stats):
     year =  datetime.datetime.now().year
     month = datetime.datetime.now().month
@@ -76,7 +77,8 @@ def printStatsToFile(teamFileName, stats):
         teamFile.write(str(index)+', ')
     teamFile.write('\n')
 
-
+# THIS METHOD TAKES THE HTML FROM ESPN.COM/NBA/SCOREBOARD/GAME_NUMBER AND RETURNS AN ARRAY WITH THE TOTAL STATS FOR BOTH
+# TEAMS.
 def readLiveStats(html):
     html = html.splitlines()
     rightSpot = False
@@ -119,9 +121,10 @@ while theTime.hour < 15:
 '''
 
 
-#print 'read the old stats!'
 
-# PRIME THE LOOP
+# THIS METHOD DOES ALL OF THE HEAVY LIFING.  IT RUNS INDEFENITELY.
+# AT 01:01, IT READS THE OLD STATS AT PRINTS THEM TO A FILE (WILL BE DEPRICATED UPON COMPLETION OF NEURAL 
+# NETWORK).
 while(True):
     theTime = datetime.datetime.now()
     if theTime.hour == 1 and theTime.minute < 2:

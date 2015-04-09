@@ -9,6 +9,7 @@ years = ['2014', '2015']
 gameLog = 'gamelog/'
 BASE_URL = "http://www.basketball-reference.com/teams"
 
+# DEFENSIVE REBOUDS NOT INCLUDED IN HTML.  DO THE MATH AND ADD THEM MANUALLY.
 def addDefensiveRebounds(text):
     x = 0
     while x < (len(text)):
@@ -25,6 +26,7 @@ def addDefensiveRebounds(text):
 
     return text 
 
+#
 def sanitizeArray(array):
     toReturn = []
     for row in array:    
@@ -46,7 +48,8 @@ def sanitizeArray(array):
     return toReturn        
 
            
-
+# THIS METHOD DOES ALL OF THE HEAVY LIFTING.  IT READS THE OLD STATS, ONE ROW AT A TIME,
+# AND APPENDS THEM TO A MASTER LIST.
 def readOldStats():
     X = np.empty([38])
     teamNumber = -1

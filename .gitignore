@@ -1,3 +1,5 @@
 *.pyc
 previousData/*
 *.swp
+.DS_Store
+

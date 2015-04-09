@@ -4,6 +4,8 @@ import time
 
 import liveStatsSupportFunctions
 import oldStatsReader
+import trainer
+import neural_network
 
 def getNamesFromHTML(htmlString):
     

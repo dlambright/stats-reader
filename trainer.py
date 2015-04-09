@@ -14,17 +14,29 @@ class trainer(object):
     def callbackF(self, params):
         self.N.setParams(params)
         self.J.append(self.N.costFunction(self.X, self.y))
+        self.testJ.append(self.N.costFunction(self.testX, self.testY))
 
-    def train(self, X, y):
+    def train(self, trainX, trainY, testX, testY):
+        self.X = trainX
+        self.y = trainY
 
-        self.X = X
-        self.y = y
-
+        self.testX = testX
+        self.testY = testY
+        
         self.J = []
+        self.testJ = []
         params0 = self.N.getParams()
         
-        options = {'maxiter' : 200, 'disp' : True} 
-        _res = optimize.minimize(self.costFunctionWrapper, params0, jac = True, method='BFGS', args = (X,y), options=options, callback=self.callbackF)
+        
 
+        options = {'maxiter': 200, 'disp' : True} 
+        _res = optimize.minimize(self.costFunctionWrapper, 
+                                    params0, 
+                                    jac = True, 
+                                    method='BFGS', 
+                                    args = (trainX,trainY), 
+                                    options=options, 
+                                    callback=self.callbackF)
+        #print _res
         self.N.setParams(_res.x)
         self.optimizationResults = _res

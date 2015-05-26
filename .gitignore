@@ -3,6 +3,9 @@ previousData/*
 *.DS_Store
 
 # Created by https://www.gitignore.io
+*.swp
+.DS_Store
+
 
 ### OSX ###
 .DS_Store

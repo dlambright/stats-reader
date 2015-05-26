@@ -10,8 +10,8 @@ import pylab as plt
 IF THIS FALLS TO SHIT, MAYBE TAKE THE PERCENTAGES OUT.  THEY MIGHT BE CAUSING SOMETHING FISHY IN THE CALCULATION.
 '''
 
-
-NN = nn.neuralNetwork(36, .001)
+# Input Layer size, Hidden Layer size, lambda size
+NN = nn.neuralNetwork(36, 24, .0005)
 T = tr.trainer(NN)
 #X = np.array(([3.0,5.0],[5.0,1.0],[10.0,2.0]), dtype = float)
 #y = np.array(([75.0],[82.0], [93.0]), dtype = float)
@@ -62,7 +62,7 @@ NN.forward(X)
 
 
 gameProgressionArray = np.empty([36])
-openFile = open('gameData/AtlantaHawks/2-28-2015.csv').read()
+openFile = open('gameData/AtlantaHawks/2-25-2015.csv').read()
 fileData = openFile.split('\n')
 for line in fileData:
     temp = np.fromstring(line, dtype=float, count = 36, sep=',')
@@ -89,7 +89,7 @@ plt.xlim(0.,150)
 plt.ylim(0.,1.0)
 plt.xlabel('iteration')
 plt.ylabel('Win Probability')
-plt.title('Atlanta Hawks 2-25-2015')
+plt.title('Dallas mavericks 2-25-2015')
 plt.grid(True)
 #plt.savefig("result" + str(j)+ "index" +str(i)+"node.png")
 plt.show()

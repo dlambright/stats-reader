@@ -10,6 +10,15 @@ class neuralNetwork(object):
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
         self.Lambda = newLambda
         self.iteration = 0
+    
+    def __init__(self, newInputLayerSize, newHLSize, newLambda):
+        self.inputLayerSize = newInputLayerSize 
+        self.outputLayerSize = 1
+        self.hiddenLayerSize = newHLSize
+        self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
+        self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
+        self.Lambda = newLambda
+        self.iteration = 0
         
     def sigmoid(self, z):
         toReturn = 1/(1+np.exp(-z))

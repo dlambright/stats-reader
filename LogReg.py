@@ -57,8 +57,7 @@ def getCostFunctionJ(theta, X, y):
 
 
 def logisticRegression(theta, alpha, X, y):
-    #θ :=θ−αmXT(g(Xθ)−y⃗ )
-    m = y.shape{
+    m = y.shape
     theta = theta - (alpha/m)
 
 

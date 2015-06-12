@@ -22,14 +22,14 @@ def emulate(q):
 
 def f():
     print "wut"
-    child_conn.send("dindu nuffin")
+    child_conn.send("Sent from F")
 
 @app.route("/")
 def hello():
     print "hello"
-    temp = child_conn.recv()
-    print temp
-    return temp
+    #temp = child_conn.recv()
+    #print temp
+    return "Hello" #temp
 
 @app.route("/todaysGames")
 def todaysGames():    
@@ -41,10 +41,10 @@ def todaysGames():
 if __name__ == "__main__":
     
     parent_conn, child_conn = Pipe()
-    p = Process(target=f, args=())
-    p.start()
+    #p = Process(target=f, args=())
+    #p.start()
     #print parent_conn.recv()   # prints "[42, None, 'hello']"
-    p.join()
+    #p.join()
 
     app.run(host='0.0.0.0', port=80, debug=True)
 

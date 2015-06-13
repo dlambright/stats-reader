@@ -1,7 +1,6 @@
 from multiprocessing import Process, Queue, Pipe
 import time
-#import multiprocessing_import_worker
-
+import csv
 from flask import Flask
 app = Flask(__name__)
 
@@ -10,26 +9,27 @@ q = Queue()
 
 global parent_conn, child_conn
 
+# ATL VS DAL 2-25-2015
+def emulate():
+    atlFile = open("gameData/AtlantaHawks/2-25-2015.csv", "r")
+    atlData = atlFile.read()
+    
+    with open('gameData/AltantaHawks/2-25-2015.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+    
+    for line in atlData:
+        print line + "\n" 
 
-def emulate(q):
-    print "emulate"
-    global theTimeDoe
-    for x in range(0,60):
-        theTimeDoe = x
-        q = Queue()
-        q.put(theTimeDoe)
-        time.sleep(5)
 
-def f():
+def f(conn):
     print "wut"
-    child_conn.send("Sent from F")
+    conn.send("Sent from F")
 
 @app.route("/")
 def hello():
     print "hello"
-    #temp = child_conn.recv()
-    #print temp
-    return "Hello" #temp
+    temp = child_conn.recv()
+    return temp
 
 @app.route("/todaysGames")
 def todaysGames():    
@@ -40,11 +40,10 @@ def todaysGames():
 
 if __name__ == "__main__":
     
-    parent_conn, child_conn = Pipe()
-    #p = Process(target=f, args=())
-    #p.start()
-    #print parent_conn.recv()   # prints "[42, None, 'hello']"
-    #p.join()
+    ##parent_conn, child_conn = Pipe()
+    ##p = Process(target=f, args=(parent_conn,))
+    ##p.start()
 
-    app.run(host='0.0.0.0', port=80, debug=True)
+    ##app.run(host='0.0.0.0', port=80, debug=True)
 
+    emulate()

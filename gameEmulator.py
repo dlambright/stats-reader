@@ -7,6 +7,19 @@ q = Queue()
 
 global ATL_parent_conn, ATL_child_conn
 global DAL_parent_conn, DAL_child_conn
+
+
+#def calculateTSP(stats):
+    #stats = stats.replace(" ", "")
+    #statsLine = stats.split(",")
+    #points = str(statsLine[0])
+    #temp = int(points)
+    #fieldGoalsAttempted = float(statsLine[3])
+    #freeThrowsAttempted = float(statsLine[9])
+    #percentage = points / (2*(fieldGoalsAttempted + (.44 * freeThrowsAttempted)))
+    #satsLine = statsLine + str(percentage)
+    #return temp #percentage
+
 # ATL VS DAL 2-25-2015
 def emulate(conn, filePath):
     data = []
@@ -17,8 +30,6 @@ def emulate(conn, filePath):
     #for row in data:
     conn.send(data[len(data)-1])
     time.sleep(5) 
-
-
     
 
 def f(conn):
@@ -35,14 +46,18 @@ def todaysGames():
 
 @app.route("/ATL")
 def hawksGame():
-    atlStatsLine = ATL_child_conn.recv()
-    atlStatsLine = "104, 87, 39, 85, 0.458823529412, 13, 35, 0.371428571429, 13, 16, 0.8125, 10, 31, 41, 28, 7, 2, 11, 18, 34, 80, 0.425, 5, 31, 0.161290322581, 14, 18, 0.777777777778, 13, 31, 44, 20, 0, 3, 15, 18,"
+    #atlStatsLine = ATL_child_conn.recv()
+    atlStatsLine = "104, 87, 39, 85, 0.458823529412, 13, 35, 0.371428571429, 13, 16, 0.8125, 10, 31, 41, 28, 7, 2, 11, 18, 34, 80, 0.425, 5, 31, 0.161290322581, 14, 18, 0.777777777778, 13, 31, 44, 20, 0, 3, 15, 18, .5649717141"
+    #atlStatsLine = calculateTSP(atlStatsLine)
     return atlStatsLine
 
 @app.route("/DAL")
 def mavericksGame():
-    dalStatsLine = DAL_child_conn.recv()
-    return  dalStatsLine
+     
+    dalStatsLine =  "87, 104, 34, 80, 0.425, 5, 31, 0.161290322581, 14, 18, 0.777777777778, 13, 31, 44, 20, 0, 3, 15, 18, 39, 85, 0.458823529412, 13, 35, 0.371428571429, 13, 16, 0.8125, 10, 31, 41, 28, 7, 2, 11, 18, 0.494767970883"
+    #dalStatsLine = DAL_child_conn.recv()
+    return dalStatsLine
+    
 
 
 

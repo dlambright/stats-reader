@@ -14,8 +14,24 @@ def print_game(fileName, delay):
     with open(fileName+".csv") as f:
         for line in f:
             line.replace(" ", "")
+            separatedLine = line.split(",")
+
+            score = float(separatedLine[0])
+            fieldGoalsAttempted = float(separatedLine[3])
+            foulShotsAttempted = float(separatedLine[9])
+
+            denominator = (2*(fieldGoalsAttempted + (.44*foulShotsAttempted)))
+            
+            TSP = 0
+            if denominator != 0: 
+                TSP = score / (2*(fieldGoalsAttempted + (.44*foulShotsAttempted))) 
+            separatedLine.pop()
+            separatedLine.append(str(TSP))
             fileOut = open(fileName + "-today.csv", 'a')
-            fileOut.write(line)
+            
+            for item in separatedLine:
+                fileOut.write(item + ", ")
+            fileOut.write('\n')
             fileOut.close()
             time.sleep(delay)
             count += 1

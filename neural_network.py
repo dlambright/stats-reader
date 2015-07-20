@@ -50,7 +50,7 @@ class neuralNetwork(object):
         return yHat
     
     def costFunctionPrime(self, X, y):
-        print 'iteration ' + str(self.iteration)
+        #print 'iteration ' + str(self.iteration)
         self.iteration = self.iteration + 1
         self.yHat = self.forward(X)
         

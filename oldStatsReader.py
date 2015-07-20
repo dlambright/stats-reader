@@ -50,53 +50,54 @@ def sanitizeArray(array):
            
 # THIS METHOD DOES ALL OF THE HEAVY LIFTING.  IT READS THE OLD STATS, ONE ROW AT A TIME,
 # AND APPENDS THEM TO A MASTER LIST.
-def readOldStats():
+def readOldStats(teamName):
     X = np.empty([38])
     teamNumber = -1
-    for team in teams:
-        teamNumber = teamNumber + 1
-        readInData = []
-        dataFile = open('previousData/'+ team + '.csv', 'w+')
-        for year in years:
-            rightSpot = False
-            #print BASE_URL + '/' + team + '/' + year + '/' + gameLog
-            pageHTML = urlopen(BASE_URL + '/' + team + '/' + year + '/' + gameLog).read()
-            currentLines = pageHTML.split('\n')        
+    #for team in teams:
+    teamNumber = teamNumber + 1
+    readInData = []
+    dataFile = open('previousData/'+ teamName + '.csv', 'w+')
+    for year in years:
+        rightSpot = False
+        #print BASE_URL + '/' + team + '/' + year + '/' + gameLog
+        pageHTML = urlopen(BASE_URL + '/' + teamName + '/' + year + '/' + gameLog).read()
+        currentLines = pageHTML.split('\n')        
         
-            for x in range(0, len(currentLines)):
-                if 'tgl_basic.'in currentLines[x]:
-                    rightSpot = True
-                if rightSpot == True:   
-                    for y in range(6,42):
-                        readInData.append(currentLines[x+y])
-                    x += 42
-                    rightSpot = False
+        for x in range(0, len(currentLines)):
+            if 'tgl_basic.'in currentLines[x]:
+                rightSpot = True
+            if rightSpot == True:   
+                for y in range(6,42):
+                    readInData.append(currentLines[x+y])
+                x += 42
+                rightSpot = False
         
         
-            readInData = sanitizeArray(readInData)
+        readInData = sanitizeArray(readInData)
             
-            #create training data
-            for x in range(0, len(readInData)/37):
-                tempArray = readInData[slice(x*37, (x+1) *37)]
-                tempArray.insert(0, teamNumber)
-                if 'W' in tempArray[1]:
-                    tempArray[1] = 1
-                elif 'L' in tempArray[1]:
-                    tempArray[1] = 0
+        #create training data
+        for x in range(0, len(readInData)/37):
+            tempArray = readInData[slice(x*37, (x+1) *37)]
+            tempArray.insert(0, teamNumber)
+            if 'W' in tempArray[1]:
+                tempArray[1] = 1
+            elif 'L' in tempArray[1]:
+                tempArray[1] = 0
                 
-                tempNPArray = np.asarray(tempArray, dtype = float )
-                X = np.vstack((X, tempNPArray))
+            tempNPArray = np.asarray(tempArray, dtype = float )
+            X = np.vstack((X, tempNPArray))
 
-            # write out data to file (probably delete down the road)
-            #for x in range(0, len(readInData)):
-            #    if x % 37 == 0 and x != 0:
-            #        dataFile.write('\n')
-            #    dataFile.write(readInData[x] + ',')
+        # write out data to file (probably delete down the road)
+        #for x in range(0, len(readInData)):
+        #    if x % 37 == 0 and x != 0:
+        #        dataFile.write('\n')
+        #    dataFile.write(readInData[x] + ',')
 
-            #dataFile.write('\n')    
-            #dataFile.closed
+        #dataFile.write('\n')    
+        #dataFile.closed
         
-        print str(team) + ' done.'
+    print str(teamName) + ' done.'
+    
     X = X[1:]
     
     print "scan complete"

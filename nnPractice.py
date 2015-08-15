@@ -14,7 +14,7 @@ IF THIS FALLS TO SHIT, MAYBE TAKE THE PERCENTAGES OUT.  THEY MIGHT BE CAUSING SO
 
 teams = ['ATL','BOS','BRK','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHO','POR','SAC','SAS','TOR','UTA','WAS']
 
-teamFullNames = ["AtlantaHawks", "BostonCeltics", "BrooklynNets", "CharlotteHornets", "ChicagoBulls", "ClevelandCavaliers", "DallasMavericks", "DenverNuggets", "DetroitPistons", "GoldenStateWarriors", "HoustonRockets", "IndianaPacers", "LosAngelesClippers", "LosAngelesLakers", "MemphisGrizzlies", "MiamiHeat", "MilwaukeeBucks", "NewOrleansPelicans", "NewYorkKnicks", "OklahomaCityThunder", "OrlandoMagic", "Philadelphia76ers", "PhoenixSuns", "PortlandTrailblazers", "SacramentoKings", "SanAntonioSpurs", "TorontoRaptors", "UtahJazz", "WashingtoWizards"]
+teamFullNames = ["AtlantaHawks", "BostonCeltics", "BrooklynNets", "CharlotteHornets", "ChicagoBulls", "ClevelandCavaliers", "DallasMavericks", "DenverNuggets", "DetroitPistons", "GoldenStateWarriors", "HoustonRockets", "IndianaPacers", "LosAngelesClippers", "LosAngelesLakers", "MemphisGrizzlies", "MiamiHeat", "MilwaukeeBucks", "MinnesotaTimberwolves", "NewOrleansPelicans", "NewYorkKnicks", "OklahomaCityThunder", "OrlandoMagic", "Philadelphia76ers", "PhoenixSuns", "PortlandTrailblazers", "SacramentoKings", "SanAntonioSpurs", "TorontoRaptors", "UtahJazz", "WashingtonWizards"]
 
 # Input Layer size, Hidden Layer size, lambda size
 
@@ -44,9 +44,9 @@ for index in range(0,len(teams)):
     testX = X[np.arange(0, testSize),:]
     testY = y[np.arange(0, testSize),:]
     testX = testX/np.amax(testX, axis=0)
-    print testX.shape
+    #print testX.shape
 
-    print 'training...'
+    #print 'training...'
     T.train(trainX, trainY, testX, testY)
     '''
     #plot the test vs train 
@@ -71,7 +71,6 @@ for index in range(0,len(teams)):
 
     print teamFullNames[index] 
     if os.path.exists('gameData/'+teamFullNames[index]+'/2-25-2015.csv'):
-        print 'in loop'
         gameProgressionArray = np.empty([36])
         openFile = open('gameData/' + teamFullNames[index] + '/2-25-2015.csv').read()
         fileData = openFile.split('\n')
@@ -87,7 +86,6 @@ for index in range(0,len(teams)):
 
 
         result = NN.forward(gameProgressionArray)
-        print 'gameData/' + teamFullNames[index] + '/NN_Result.csv'    
         fileOut = open('gameData/' + teamFullNames[index] + '/NN_Result.csv', 'w')
         for item in result:
             fileOut.write(str(item[0]) + ", ")

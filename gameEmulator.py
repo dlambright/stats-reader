@@ -38,7 +38,7 @@ def hello():
 
 @app.route("/todaysGames")
 def todaysGames():    
-    todaysGames = "AtlantaHawks DallasMavericks BostonCeltics NewYorkKnicks ChicagoBulls CharlotteHornets DenverNuggets PhoenixSuns HoustonRockets LosAngelesClippers MilwaukeeBucks Philadelphia76ers MinnesotaTimberwolves WashingtonWizards NewOrleansPelicans BrooklynNets OrlandoMagic MiamiHeat PortlandTrailblazers SanAntonioSpurs SacramentoKings MemphisGrizzlies UtahJazz LosAngelesLakers"
+    todaysGames = "AtlantaHawks 104;DallasMavericks 87;BostonCeltics 115;NewYorkKnicks 94;ChicagoBulls 86;CharlotteHornets 98;DenverNuggets 96;PhoenixSuns 110;HoustonRockets 110;LosAngelesClippers 105;MilwaukeeBucks 104;Philadelphia76ers 88;MinnesotaTimberwolves 97;WashingtonWizards 77;NewOrleansPelicans 102;BrooklynNets 96;OrlandoMagic 90;MiamiHeat 93;PortlandTrailblazers 111;SanAntonioSpurs 95;SacramentoKings 102;MemphisGrizzlies 90;UtahJazz 97;LosAngelesLakers 100"
     return todaysGames
 
 @app.route("/AtlantaHawks")

@@ -1,19 +1,20 @@
 from multiprocessing import Process, Queue, Pipe
 import time
-from flask import Flask
+from flask import Flask, jsonify
 from threading import Thread
 import writeNewGameFiles
-import thread
+from recyclerViewGame import RecyclerViewGame
+import json
 app = Flask(__name__)
 
+
+'''
 q = Queue()
 
 global ATL_parent_conn, ATL_child_conn
 global DAL_parent_conn, DAL_child_conn
 global atlStats
 
-
-# ATL VS DAL 2-25-2015
 def emulate(filePath):
     global atlStats
     data = []
@@ -26,20 +27,42 @@ def emulate(filePath):
         #conn.send(data[len(data)-1])
         print row
         time.sleep(.5) 
-    
+   
 
 def f(conn):
     print "wut"
     conn.send("Sent from F")
+'''
+
+def getTodaysGames():
+    gamesArray = [RecyclerViewGame("AtlantaHawks", "DallasMavericks", "104", "87", "1"),
+            RecyclerViewGame("BostonCeltics", "NewYorkKnicks", "115", "94", "2"),
+            RecyclerViewGame("ChicagoBulls", "CharlotteHornets", "86", "98", "3"),
+            RecyclerViewGame("DenverNuggets", "PhoenixSuns", "96", "110", "4"),
+            RecyclerViewGame("HoustonRockets", "LosAngelesClippers", "110", "105", "5"),
+            RecyclerViewGame("MilwaukeeBucks", "Philadelphia76ers", "104", "88", "6"),
+            RecyclerViewGame("MinnesotaTimberwolves", "WashingtonWizards", "97", "77", "7"),
+            RecyclerViewGame("NewOrleansPelicans", "BrooklynNets", "102", "96", "8"),
+            RecyclerViewGame("OrlandoMagic", "MiamiHeat", "90", "93", "9"),
+            RecyclerViewGame("PortlandTrailblazers", "SanAntonioSpurs", "111", "95", "10"),
+            RecyclerViewGame("SacramentoKings", "MemphisGrizzlies", "102", "90", "11"),
+            RecyclerViewGame("UtahJazz", "LosAngelesLakers", "97", "100", "12") 
+            ]
+    gameDict = {"games" : gamesArray}
+    
+    return json.dumps(gameDict, default=RecyclerViewGame.serialize)
 
 @app.route("/")
 def hello():
-    return "Main Page"
+    return "NNBA Main Page"
 
 @app.route("/todaysGames")
 def todaysGames():    
-    todaysGames = "AtlantaHawks 104;DallasMavericks 87;BostonCeltics 115;NewYorkKnicks 94;ChicagoBulls 86;CharlotteHornets 98;DenverNuggets 96;PhoenixSuns 110;HoustonRockets 110;LosAngelesClippers 105;MilwaukeeBucks 104;Philadelphia76ers 88;MinnesotaTimberwolves 97;WashingtonWizards 77;NewOrleansPelicans 102;BrooklynNets 96;OrlandoMagic 90;MiamiHeat 93;PortlandTrailblazers 111;SanAntonioSpurs 95;SacramentoKings 102;MemphisGrizzlies 90;UtahJazz 97;LosAngelesLakers 100"
-    return todaysGames
+    #todaysGames = "AtlantaHawks 104 DallasMavericks 87;BostonCeltics 115 NewYorkKnicks 94;ChicagoBulls 86 CharlotteHornets 98;DenverNuggets 96 PhoenixSuns 110;HoustonRockets 110 LosAngelesClippers 105;MilwaukeeBucks 104 Philadelphia76ers 88;MinnesotaTimberwolves 97 WashingtonWizards 77;NewOrleansPelicans 102 BrooklynNets 96;OrlandoMagic 90 MiamiHeat 93;PortlandTrailblazers 111 SanAntonioSpurs 95;SacramentoKings 102 MemphisGrizzlies 90;UtahJazz 97 LosAngelesLakers 100"
+    
+    gameDict = getTodaysGames()
+
+    return gameDict
 
 @app.route("/AtlantaHawks")
 def hawksGame():

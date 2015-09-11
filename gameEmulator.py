@@ -46,12 +46,16 @@ def getTodaysGames():
             RecyclerViewGame("OrlandoMagic", "MiamiHeat", "90", "93", "9"),
             RecyclerViewGame("PortlandTrailblazers", "SanAntonioSpurs", "111", "95", "10"),
             RecyclerViewGame("SacramentoKings", "MemphisGrizzlies", "102", "90", "11"),
-            RecyclerViewGame("UtahJazz", "LosAngelesLakers", "97", "100", "12") 
+            RecyclerViewGame("UtahJazz", "LosAngelesLakers", "97", "100", "12"), 
             ]
     gameDict = {"games" : gamesArray}
     
-    return json.dumps(gameDict, default=RecyclerViewGame.serialize)
+    #return json.dumps(gameDict, default=RecyclerViewGame.serialize)
+    
+    tempGames = [RecyclerViewGame.serialize(gamesArray[1]), RecyclerViewGame.serialize(gamesArray[0])]
 
+    return json.dumps(gamesArray, default= RecyclerViewGame.to_Json)
+ 
 @app.route("/")
 def hello():
     return "NNBA Main Page"

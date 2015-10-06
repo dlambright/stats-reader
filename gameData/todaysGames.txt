@@ -1,0 +1,1 @@
+[{"awayTeamScore": "109", "homeTeamScore": "105", "gameId": "400830094", "awayTeam": "SacramentoKings", "homeTeam": "PortlandTrailblazers", "time": "12:00 Q1"}, {"awayTeamScore": "83", "homeTeamScore": "89", "gameId": "400830228", "awayTeam": "TorontoRaptors", "homeTeam": "GoldenStateWarriors", "time": "12:00 Q1"}]

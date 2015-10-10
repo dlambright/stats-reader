@@ -42,6 +42,7 @@ def getTodaysGames():
 
     return gameJson
 
+
 @app.route("/")
 def hello():
     return "NNBA Main Page"

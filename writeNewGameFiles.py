@@ -2,7 +2,7 @@ import thread
 import time
 import os
 
-timeToWait = 4
+timeToWait = 30
 #Define a function for the thread
 def print_game(fileName, delay, predictions):
     count = 0
@@ -43,7 +43,7 @@ def print_game(fileName, delay, predictions):
 
 def run():
     # MinnesotaTimberwolves, WashingtonWizards
-    todaysGames = ["AtlantaHawks", "DallasMavericks", "BostonCeltics",  "NewYorkKnicks", "ChicagoBulls", "CharlotteHornets", "DenverNuggets", "PhoenixSuns", "HoustonRockets", "LosAngelesClippers", "MilwaukeeBucks", "Philadelphia76ers", "MinnesotaTimberwolves", "WashingtonWizards", "NewOrleansPelicans", "BrooklynNets", "OrlandoMagic", "MiamiHeat", "PortlandTrailBlazers", "SanAntonioSpurs", "SacramentoKings", "MemphisGrizzlies", "UtahJazz", "LosAngelesLakers"]
+    todaysGames = ["AtlantaHawks", "DallasMavericks", "BostonCeltics",  "NewYorkKnicks", "ChicagoBulls", "CharlotteHornets", "DenverNuggets", "PhoenixSuns", "HoustonRockets", "LosAngelesClippers", "MilwaukeeBucks", "Philadelphia76ers", "MinnesotaTimberwolves", "WashingtonWizards", "NewOrleansPelicans", "BrooklynNets", "OrlandoMagic", "MiamiHeat", "PortlandTrailblazers", "SanAntonioSpurs", "SacramentoKings", "MemphisGrizzlies", "UtahJazz", "LosAngelesLakers"]
     # Create two threads as follows
     try:
         for team in todaysGames:

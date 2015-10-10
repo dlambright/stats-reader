@@ -74,6 +74,7 @@ def getTodaysGames():
         nameArray.append(actualName)
     print len(idArray)
     for index in range(len(idArray)):
+        print index
         if nameArray[index*2] != "FOREIGN TEAM" and nameArray[(index*2)+1] != "FOREIGN TEAM":
             newGame = (RecyclerViewGame(nameArray[index*2], nameArray[(index*2)+1], scoreArray[index*2], scoreArray[(index*2)+1], idArray[index]))
             gameArray.append(newGame)
@@ -91,7 +92,6 @@ def getTodaysGames():
 
     fileOut.write(outString)
     fileOut.close()
-
 
 if __name__ == "__main__":
     getTodaysGames()

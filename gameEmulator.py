@@ -36,7 +36,9 @@ def f(conn):
 '''
 
 def getTodaysGames():
-    gameJson = getTodaysGames.getTodaysGames()
+    
+
+    gameJson = open("gameData/todaysGames.txt", "r+").read()
 
     return gameJson
 

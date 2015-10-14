@@ -1,30 +1,74 @@
 from urllib2 import urlopen
 import datetime
 import time
-
+import re
 import liveStatsSupportFunctions
 import oldStatsReader
 import trainer
 import neural_network
+import getTodaysGames
+
+
+
+def getTspFromStats(stats):
+    score = stats[0]
+    print "score: " + str(score)
+    fieldGoals = stats[4]
+    print "field goals: " + str(fieldGoals)
+    freeThrows = stats[10]
+    print "free throws: " + str(freeThrows)
+
+    return 10
+
+
+
+
+
 
 def getNamesFromHTML(htmlString):
+    toReturn = []
+    titleString = re.search("<title>.+</title>", htmlString)
+    titleLine = titleString.group(0)
     
+    homeTeamString = re.search(">[A-Za-z0-9 ]+ vs.", titleLine)
+    homeTeamString = homeTeamString.group(0)[:3][1:]
+    if "Blazers" in homeTeamString:
+        homeTeamString = homeTeamString.replace("B", "b")
+    homeTeamString = homeTeamString.replace(" ", "")
+    
+    awayTeamString = re.search("vs.[A-Za-z0-9 ]+-", titleLine)
+    awayTeamString = awayTeamString.group(0)[:2][3:]
+    if "Blazers" in awayTeamString:
+        awayTeamString = awayTeamString.replace("B", "b")
+    awayTeamString = awayTeamsString.replace(" ", "")
+    
+    toReturn.append(homeTeamString)
+    toReturn.append(awayTeamString)
+
+    return toReturn
+
+    '''
     for line in htmlString:
         if 'title>' in line:
             toReturn = []
             arrayForFirstName = line.split(' vs. ')
             firstTeamTemp =  arrayForFirstName[0]
+            #print firstTeamTemp
             firstTeamSpace = firstTeamTemp[8 : len(firstTeamTemp)]
             firstTeam = firstTeamSpace.replace(' ', '')
+            #print firstTeam
             toReturn.append(firstTeam)
-
+            
+            #print "second"
             stringForSecondTeam = arrayForFirstName[1]
             secondTeamTemp = stringForSecondTeam.split(' -')
             secondTeamSpace = secondTeamTemp[0]
             secondTeam = secondTeamSpace.replace(' ', '')
+            #print secondTeam
             toReturn.append(secondTeam)
+            
             return toReturn
-
+    '''
        
 # GET THE LIVE DATA FROM THE TABLE
 def pruneFromTags(line):
@@ -59,7 +103,6 @@ def addScoresToCorrectPlaces(stats):
     score2 = [stats[1][17]]
     del stats[1][-1]
     statsLine2 = stats[1]
-
     finalStatsLine1 = score1 + score2 + statsLine1 + statsLine2
     finalStatsLine2 = score2 + score1 + statsLine2 + statsLine1
     stats[0] = finalStatsLine1
@@ -77,6 +120,10 @@ def printStatsToFile(teamFileName, stats):
     teamFile = open('gameData/' +teamFileName + '/'+str(month) + '-' + str(day) + '-' + str(year)+'.csv', 'a')
     for index in stats:
         teamFile.write(str(index)+', ')
+    
+    teamFile.write(str(0) + ', ')
+    teamFile.write(str(0) + ', ')
+
     teamFile.write('\n')
 
 # THIS METHOD TAKES THE HTML FROM ESPN.COM/NBA/SCOREBOARD/GAME_NUMBER AND RETURNS AN ARRAY WITH THE TOTAL STATS FOR BOTH
@@ -92,9 +139,9 @@ def readLiveStats(html):
         if 'TOTALS' in line:
             rightSpot = True
     teams = getNamesFromHTML(html)
+    print "Dusty"
     stats = addScoresToCorrectPlaces(stats)
     #stats = predict.predictWinProbability(stats)
-    
     
     printStatsToFile(teams[0], stats[0])
     printStatsToFile(teams[1], stats[1])
@@ -135,9 +182,9 @@ while(True):
     scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
     splitScoreboardHTML = scoreboardHTML.split('\n')
 
-    todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
-    previewGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
-    print str(len(todaysGames) + len(previewGames)) + ' games to play today'
+    todaysGames = getTodaysGames.getTodaysGamesBoxScoreIds() #liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
+    conversationGames = getTodaysGames.getTodaysGamesConversationIds() #liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
+    print str(len(todaysGames) + len(conversationGames)) + ' games to play today'
 
 
 # READ THE DATA WHILE THERE IS STILL A GAME THAT ISN'T FINISHED
@@ -146,6 +193,7 @@ while(True):
 
 
     for url in todaysGames:
+        
         try:        
             html = urlopen(url).read()
             if 'TOTALS' in html:
@@ -155,11 +203,13 @@ while(True):
             print 'Unable to find ' + url
             
     try:
-        scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
-        splitScoreboardHTML = scoreboardHTML.split('\n')
+        #scoreboardHTML = urlopen('http://scores.espn.go.com/nba/scoreboard').read()
+        #splitScoreboardHTML = scoreboardHTML.split('\n')
         
-        todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
-        previewGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
+        todaysGames = getTodaysGames.getTodaysGamesBoxScoreIds() #liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
+        conversationGames = getTodaysGames.getTodaysGamesConversationIds() #liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
+        #todaysGames = liveStatsSupportFunctions.getGamesInProgress(splitScoreboardHTML)
+        #conversationGames = liveStatsSupportFunctions.getGamesToBePlayed(splitScoreboardHTML)
     except:
         print 'unable to access scoreboard home'
             
@@ -172,8 +222,6 @@ while(True):
 
 
 raw_input('finished running. ' + str(badReads) + ' bad reads.')
-
-
 
 
 

@@ -9,10 +9,10 @@ class RecyclerViewGame:
         self.gameId = newGameID
         #self.homeTeamId = -1
         #self.awayTeamId = -1
-        
+
 
     def serialize(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True) 
 
     def to_Json(self):
         return dict(
@@ -25,5 +25,5 @@ class RecyclerViewGame:
             #homeTeamId = self.homeTeamId,
             #awayTeamId = self.awayTeamId
             )
-
+    
 

@@ -2,7 +2,7 @@ import thread
 import time
 import os
 
-timeToWait = 30
+timeToWait = 10
 #Define a function for the thread
 def print_game(fileName, delay, predictions):
     count = 0

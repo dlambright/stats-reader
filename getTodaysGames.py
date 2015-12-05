@@ -57,6 +57,10 @@ def getTodaysGamesBoxScoreIds():
     for item in idStringArray:
         temp = re.search("[0-9]+", item)
         idArray.append("http://espn.go.com/nba/boxscore?gameId=" + temp.group(0))
+    
+    for item in idArray:
+        print item
+
     return idArray
 
 
@@ -72,15 +76,76 @@ def getTodaysGamesConversationIds():
     for item in idStringArray:
         temp = re.search("[0-9]+", item)
         idArray.append("http://espn.go.com/nba/conversation?gameId=" + temp.group(0))
+    for item in idArray:
+        print item
     return idArray
 
 def getTodaysGames():
+    
+    todaysGamesArray = []
+
+    html = urlopen(scoreboardUrl, "r+").read()
+    todaysGamesRaw = re.findall("{\"uid\":.+?[0-9]{9}~c.+?Z\"}", html)
+
+    for rawGame in todaysGamesRaw:
+        #Get the team names.  Home team shows up first
+        teamArray = re.findall("shortDisplayName\":\"[A-Za-z0-9 ]+", rawGame)
+        homeTeam = teamArray[0].replace("shortDisplayName\":\"", "") 
+        awayTeam = teamArray[1].replace("shortDisplayName\":\"", "") 
+        
+        #Get the scores.  home team first
+        scoreArray = re.findall("score\":\"[0-9]+", rawGame)
+        homeTeamScore = scoreArray[0].replace("score\":\"", "")
+        awayTeamScore = scoreArray[1].replace("score\":\"", "")
+
+        #Det the game Id
+        gameIdArray = re.findall("\"[0-9]{9}\"", rawGame)
+        gameId = gameIdArray[0].replace("\"", "")    
+
+        #Get the game period
+        periodRaw = re.findall("period\":[0-9]", rawGame)
+        period = periodRaw[0].replace("period\":", "")
+        
+        #Get the period clock
+        timeRaw = re.findall("displayClock\":\"[0-9]+:[0-9]+", rawGame)
+        time = timeRaw[0].replace("displayClock\":\"", "")
+        time = time + " " + period + "Q"
+
+        #print "Home : " + homeTeam + " " + homeTeamScore
+        #print "Away : " + awayTeam + " " + awayTeamScore       
+        #print "ID   : " + gameId
+        #print "Time : " + time
+        
+        todaysGamesArray.append(RecyclerViewGame(homeTeam, awayTeam, homeTeamScore, awayTeamScore, gameId, time))
+    
+
+    os.remove("gameData/todaysGames.txt")
+    fileOut = open("gameData/todaysGames.txt", "w+")
+
+    outString = json.dumps(todaysGamesArray, default= RecyclerViewGame.to_Json)
+
+    fileOut.write(outString)
+    fileOut.close()
+
+    #1:00 notes:  use the list of games in this array in the liveStatsReader.  not sure how yet...
+
+    return todaysGamesArray
+
+
+
+
+
+
+
+
+
+    '''
     idArray = []
     scoreArray = []
     nameArray = []
     gameArray = []
     html = urlopen(scoreboardUrl, "r+").read()
-    print str(day)    
+    #print str(day)    
 
     # pick up the script that generates the data
     wholeScript = re.findall("<script>window.espn.scoreboardData.+</script>", html)
@@ -134,10 +199,32 @@ def getTodaysGames():
     fileOut.write(outString)
     fileOut.close()
 
+    '''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
-    while(True):
-        getTodaysGames()
-        time.sleep(60)
+    #while(True):
+    getTodaysGames()
+    #getTodaysGamesBoxScoreIds()  
+    #getTodaysGamesConversationIds() 
+#    time.sleep(60)
 
 
 

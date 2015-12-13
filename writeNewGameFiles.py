@@ -1,6 +1,7 @@
 import thread
 import time
 import os
+import datetime
 
 timeToWait = 10
 #Define a function for the thread
@@ -42,6 +43,11 @@ def print_game(fileName, delay, predictions):
 
 
 def run():
+    year =  datetime.datetime.now().year
+    month = datetime.datetime.now().month
+    day =   datetime.datetime.now().day
+    
+
     # MinnesotaTimberwolves, WashingtonWizards
     todaysGames = ["AtlantaHawks", "DallasMavericks", "BostonCeltics",  "NewYorkKnicks", "ChicagoBulls", "CharlotteHornets", "DenverNuggets", "PhoenixSuns", "HoustonRockets", "LosAngelesClippers", "MilwaukeeBucks", "Philadelphia76ers", "MinnesotaTimberwolves", "WashingtonWizards", "NewOrleansPelicans", "BrooklynNets", "OrlandoMagic", "MiamiHeat", "PortlandTrailblazers", "SanAntonioSpurs", "SacramentoKings", "MemphisGrizzlies", "UtahJazz", "LosAngelesLakers"]
     # Create two threads as follows
@@ -51,7 +57,7 @@ def run():
             fileIn = open("gameData/"+team+"/NN_Result.csv", 'r+').read()
             predictions = fileIn.split(",")
             
-            thread.start_new_thread(print_game, ("gameData/" + team + "/2-25-2015", timeToWait, predictions ))
+            thread.start_new_thread(print_game, ("gameData/" + team + "/"+month+"-"+day+"-"+year+"/", timeToWait, predictions ))
             time.sleep(1)
     except:
         print "Error: unable to start thread"

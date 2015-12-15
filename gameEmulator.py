@@ -35,152 +35,152 @@ def todaysGames():
 
 @app.route("/AtlantaHawks")
 def hawksGame():
-    toReturn  = open("gameData/AtlantaHawks/" + todaysDate + ".csv", 'r').read()
+    toReturn  = open("gameData/AtlantaHawks/" + todaysDate + ".nnbadat", 'r').read()
     return toReturn
 
 @app.route("/DallasMavericks")
 def mavericksGame():
-    toReturn = open("gameData/DallasMavericks/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/DallasMavericks/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
     
 @app.route("/BostonCeltics")
 def celticsGame():
-    toReturn = open("gameData/BostonCeltics/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/BostonCeltics/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/NewYorkKnicks")
 def knicksGame():
-    toReturn = open("gameData/NewYorkKnicks/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/NewYorkKnicks/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/ChicagoBulls")
 def bullsGame():
-    toReturn = open("gameData/ChicagoBulls/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/ChicagoBulls/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/CharlotteHornets")
 def hornetsGame():
-    toReturn = open("gameData/CharlotteHornets/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/CharlotteHornets/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/DenverNuggets")
 def nuggetsGame():
-    toReturn = open("gameData/DenverNuggets/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/DenverNuggets/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/PhoenixSuns")
 def sunsGame():
-    toReturn = open("gameData/PhoenixSuns/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/PhoenixSuns/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/HoustonRockets")
 def rocketsGame():
-    toReturn = open("gameData/HoustonRockets/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/HoustonRockets/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/LosAngelesClippers")
 def clippersGame():
-    toReturn = open("gameData/LosAngelesClippers/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/LosAngelesClippers/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/MilwaukeeBucks")
 def bucksGame():
-    toReturn = open("gameData/MilwaukeeBucks/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/MilwaukeeBucks/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/Philadelphia76ers")
 def seventySixersGame():
-    toReturn = open("gameData/Philadelphia76ers/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/Philadelphia76ers/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/MinnesotaTimberwolves")
 def timberwolvesGame():
-    toReturn = open("gameData/MinnesotaTimberwolves/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/MinnesotaTimberwolves/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/WashingtonWizards")
 def wizardsGame():
-    toReturn = open("gameData/WashingtonWizards/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/WashingtonWizards/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/NewOrleansPelicans")
 def pelicansGame():
-    toReturn = open("gameData/NewOrleansPelicans/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/NewOrleansPelicans/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/BrooklynNets")
 def netsGame():
-    toReturn = open("gameData/BrooklynNets/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/BrooklynNets/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/OrlandoMagic")
 def magicGame():
-    toReturn = open("gameData/OrlandoMagic/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/OrlandoMagic/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/MiamiHeat")
 def heatGame():
-    toReturn = open("gameData/MiamiHeat/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/MiamiHeat/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/PortlandTrailblazers")
 def blazersGame():
-    toReturn = open("gameData/PortlandTrailblazers/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/PortlandTrailblazers/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/SanAntonioSpurs")
 def spursGame():
-    toReturn = open("gameData/SanAntonioSpurs/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/SanAntonioSpurs/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/SacramentoKings")
 def kingsGame():
-    toReturn = open("gameData/SacramentoKings/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/SacramentoKings/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/MemphisGrizzlies")
 def grizzliesGame():
-    toReturn = open("gameData/MemphisGrizzlies/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/MemphisGrizzlies/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/UtahJazz")
 def jazzGame():
-    toReturn = open("gameData/UtahJazz/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/UtahJazz/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/LosAngelesLakers")
 def lakersGame():
-    toReturn = open("gameData/LosAngelesLakers/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/LosAngelesLakers/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/ClevelandCavaliers")
 def cavsGame():
-    toReturn = open("gameData/ClevelandCavaliers/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/ClevelandCavaliers/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/OklahomaCityThunder")
 def thunderGame():
-    toReturn = open("gameData/OklahomaCityThunder/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/OklahomaCityThunder/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/GoldenStateWarriors")
 def warriorsGame():
-    toReturn = open("gameData/GoldenStateWarriors/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/GoldenStateWarriors/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/IndianaPacers")
 def pacersGame():
-    toReturn = open("gameData/IndianaPacers/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/IndianaPacers/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/TorontoRaptors")
 def raptorsGame():
-    toReturn = open("gameData/TorontoRaptors/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/TorontoRaptors/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 @app.route("/DetroitPistons")
 def pistonsGame():
-    toReturn = open("gameData/DetroitPistons/" + todaysDate + ".csv", 'r').read()     
+    toReturn = open("gameData/DetroitPistons/" + todaysDate + ".nnbadat", 'r').read()     
     return toReturn
 
 if __name__ == "__main__":

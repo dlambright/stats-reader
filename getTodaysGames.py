@@ -13,6 +13,7 @@ day =   datetime.datetime.now().day
 
 
 scoreboardUrl = "http://espn.go.com/nba/scoreboard/_/date/" + str(year) + str(month) + str(day)
+#scoreboardUrl = "http://espn.go.com/nba/scoreboard"
 
 nameConversionDictionary = {"Hawks":"AtlantaHawks", 
     "Celtics":"BostonCeltics",
@@ -116,7 +117,7 @@ def writeTeamStats(filePath, gameDataHtml, gameTime):
     if os.path.exists(filePath):        
         awayDataFile =  open(filePath)
         totalAwayTeamStats = json.load(awayDataFile)   
-        awayDataFile.close()   
+        awayDataFile.close() 
     awayStatsLine = createStatsLineFromString(gameDataHtml)
     awayStatsLine.gameTime = gameTime
     totalAwayTeamStats.append(awayStatsLine)
@@ -126,13 +127,17 @@ def writeTeamStats(filePath, gameDataHtml, gameTime):
     
 
 def readLiveStats(game):
-    
-    html = urlopen("http://espn.go.com/nba/boxscore?gameId=" + game.gameId).read()
+    try:
+        html = urlopen("http://espn.go.com/nba/boxscore?gameId=" + game.gameId).read()
+    except Error as e:
+        print e.reason
     rawGameData = re.findall("TOTALS[\s\S]+?Fast break points", html)
-    
-    writeTeamStats('gameData/' + game.awayTeam + '/' + str(month) + '-' + str(day) + '-' + str(year) + '.nnbadat', rawGameData[0], game.gameTime)
-    writeTeamStats('gameData/' + game.homeTeam + '/' + str(month) + '-' + str(day) + '-' + str(year) + '.nnbadat', rawGameData[1], game.gameTime)
-        
+
+    if len(rawGameData) == 2: 
+        writeTeamStats('gameData/' + game.awayTeam + '/' + str(month) + '-' + str(day) + '-' + str(year) + '.nnbadat', rawGameData[0], game.gameTime)
+        writeTeamStats('gameData/' + game.homeTeam + '/' + str(month) + '-' + str(day) + '-' + str(year) + '.nnbadat', rawGameData[1], game.gameTime)
+    else:
+        print "Box Score not available for " + game.homeTeam + " vs " + game.AwayTeam    
         
 
 
@@ -140,9 +145,10 @@ def getTodaysGames():
     
     todaysGamesArray = []
 
+
     html = urlopen(scoreboardUrl, "r+").read()
     todaysGamesRaw = re.findall("{\"uid\":.+?[0-9]{9}~c.+?Z\"}", html)
-    
+ 
     for rawGame in todaysGamesRaw:
         #Get the team names.  Home team shows up first
         teamArray = re.findall("shortDisplayName\":\"[A-Za-z0-9 ]+", rawGame)
@@ -175,8 +181,6 @@ def getTodaysGames():
         todaysGamesArray.append(RecyclerViewGame(homeTeam, awayTeam, homeTeamScore, awayTeamScore, gameId, gameTime, progress))
     
    
-    #for game in todaysGamesArray: 
-    #    readLiveStats(game)
 
     os.remove("gameData/todaysGames.txt")
     
@@ -278,15 +282,9 @@ def getTodaysGames():
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #while(True):
-    getTodaysGames()
+    #getTodaysGames()
     #getTodaysGamesBoxScoreIds()  
     #getTodaysGamesConversationIds() 
-#    time.sleep(60)
-
-
-
-
-
-
+    #time.sleep(60)

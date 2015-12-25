@@ -3,11 +3,47 @@ import numpy as np
 
 print "Reading training data....."
 
-#teams = ['ATL','BOS','BRK','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHO','POR','SAC','SAS','TOR','UTA','WAS']
-teams = ['ATL']
-years = ['2012', '2013', '2014', '2015']
+teams = ['ATL','BOS','BRK','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHO','POR','SAC','SAS','TOR','UTA','WAS']
+#teams = ['ATL']
+years = ['2012', '2013', '2014', '2015', '2016']
 gameLog = 'gamelog/'
 BASE_URL = "http://www.basketball-reference.com/teams"
+
+nameConversionDictionary = {"AtlantaHawks":"ATL", 
+    "BostonCeltics":"BOS",
+    "BrooklynNets":"BRK",
+    "CharlotteHornets":"CHA",
+    "ChicagoBulls":"CHI",
+    "ClevelandCavaliers":"CLE",
+    "DallasMavericks":"DAL",
+    "DenverNuggets":"DEN",
+    "DetroitPistons":"DET",
+    "GoldenStateWarriors":"GSW",
+    "HoustonRockets":"HOU",
+    "IndianaPacers":"IND",
+    "LosAngelesClippers":"LAC",
+    "LosAngelesLakers":"LAL",
+    "MemphisGrizzlies":"MEM",
+    "MiamiHeat":"MIA",
+    "MilwaukeeBucks":"MIL",
+    "MinnesotaTimberwolves":"MIN",
+    "NewOrleansPelicans":"NOP",
+    "NewYorkKnicks":"NYK",
+    "OklahomaCityThunder":"OKC",
+    "OrlandoMagic":"ORL",
+    "Philadelphia76ers":"PHI",
+    "PhoenixSuns":"PHO",
+    "PortlandTrailblazers":"POR",
+    "SacramentoKings":"SAC",
+    "SanAntonioSpurs":"SAS",
+    "TorontoRaptors":"TOR",
+    "UtahJazz":"UTA",
+    "WashingtonWizards":"WAS"}
+
+
+
+
+
 
 # DEFENSIVE REBOUDS NOT INCLUDED IN HTML.  DO THE MATH AND ADD THEM MANUALLY.
 def addDefensiveRebounds(text):
@@ -54,6 +90,8 @@ def sanitizeArray(array):
 # THIS METHOD DOES ALL OF THE HEAVY LIFTING.  IT READS THE OLD STATS, ONE ROW AT A TIME,
 # AND APPENDS THEM TO A MASTER LIST.
 def readOldStats(teamName):
+    print teamName
+    teamName = nameConversionDictionary[teamName]
     print teamName
     X = np.empty([38])
     teamNumber = -1
@@ -115,7 +153,8 @@ def readOldStats(teamName):
     #print y
     X = X[:,2:]
     #X = X[:, [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]]
-    
+    print len(X)
+    print len(y) 
     return X, y
 
 #sampleDataRead = np.array([93, 91, 34, 79, 0.430379746835, 10, 25, 0.4, 15, 20, 0.75, 8, 29, 37, 23, 12, 5, 18, 19, 32, 81, 0.395061728395, 7, 26, 0.269230769231, 20, 21, 0.952380952381, 14, 33, 47, 17, 12, 3, 23, 16])
@@ -128,7 +167,8 @@ def readOldStats(teamName):
 #print X[0]
 #print sampleDataRead.shape
 
-
+if __name__ == "__main__":
+      readOldStats("UtahJazz") 
 
 
 

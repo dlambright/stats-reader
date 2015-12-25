@@ -2,7 +2,6 @@ from urllib2 import urlopen
 import datetime
 import time
 import re
-#import liveStatsSupportFunctions
 #import oldStatsReader
 #import trainer
 #import neural_network
@@ -32,10 +31,10 @@ while theTime.hour < 15:
 # AT 01:01, IT READS THE OLD STATS AT PRINTS THEM TO A FILE (WILL BE DEPRICATED UPON COMPLETION OF NEURAL 
 # NETWORK).
 while(True):
-    #theTime = datetime.datetime.now()
-    #if theTime.hour == 1 and theTime.minute < 2:
+    theTime = datetime.datetime.now()
+    if theTime.hour == 1 and theTime.minute < 2:
     #    oldStatsReader.readOldStats()
-    
+        print "early eh?"
     try:
         todaysGames = getTodaysGames.getTodaysGames()
         print "todaysGames Done"

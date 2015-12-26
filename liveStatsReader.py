@@ -2,11 +2,13 @@ from urllib2 import urlopen
 import datetime
 import time
 import re
-#import oldStatsReader
+import oldStatsReader
 #import trainer
 #import neural_network
 import getTodaysGames
 import os.path
+
+nnParamsDictionary = {}
 
 '''
  ____ ____ ____ ____ ____ _________ ____ ____ ____ ____ ____ ____ 
@@ -33,7 +35,7 @@ while theTime.hour < 15:
 while(True):
     theTime = datetime.datetime.now()
     if theTime.hour == 1 and theTime.minute < 2:
-    #    oldStatsReader.readOldStats()
+        nnParamsDictionary = {}
         print "early eh?"
     try:
         todaysGames = getTodaysGames.getTodaysGames()
@@ -41,8 +43,16 @@ while(True):
 
         # READ THE DATA WHILE THERE IS STILL A GAME THAT ISN'T FINISHED
         for game in todaysGames:
+            if game.homeTeam not in nnParamsDictionary:
+                nnParamsDictionary.update({game.homeTeam : oldStatsReader.readOldStats(game.homeTeam)})
+
+            if game.awayTeam not in nnParamsDictionary:
+                nnParamsDictionary.update({game.awayTeam : oldStatsReader.readOldStats(game.awayTeam)})
+
             if game.gameInProgress != "STATUS_FINAL" and game.gameInProgress != "STATUS_SCHEDULED":
-                print game.homeTeam            
+                print game.homeTeam
+                game.homeTeamNnParams = nnParamsDictionary[game.homeTeam]
+                game.awayTeamNnParams = nnParamsDictionary[game.awayTeam]
                 getTodaysGames.readLiveStats(game)
     except:
         print 'yolo'

@@ -8,7 +8,8 @@ class RecyclerViewGame:
         self.gameTime = newTime
         self.gameId = newGameID
         self.gameInProgress = newGameInProgress
-
+        self.homeTeamNnParams = []
+        self.awayTeamNnParams = []
 
     def serialize(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True) 

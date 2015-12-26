@@ -153,8 +153,8 @@ def readOldStats(teamName):
     #print y
     X = X[:,2:]
     #X = X[:, [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]]
-    print len(X)
-    print len(y) 
+    #print "length of X: " + str(len(X))
+    #print "length of Y: " + str(len(y)) 
     return X, y
 
 #sampleDataRead = np.array([93, 91, 34, 79, 0.430379746835, 10, 25, 0.4, 15, 20, 0.75, 8, 29, 37, 23, 12, 5, 18, 19, 32, 81, 0.395061728395, 7, 26, 0.269230769231, 20, 21, 0.952380952381, 14, 33, 47, 17, 12, 3, 23, 16])
@@ -167,8 +167,8 @@ def readOldStats(teamName):
 #print X[0]
 #print sampleDataRead.shape
 
-if __name__ == "__main__":
-      readOldStats("UtahJazz") 
+#if __name__ == "__main__":
+#      readOldStats("UtahJazz") 
 
 
 
